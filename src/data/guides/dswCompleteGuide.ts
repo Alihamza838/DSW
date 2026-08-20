@@ -1,0 +1,156 @@
+import { ArticleGuide } from "../../types";
+
+export const dswCompleteGuide: ArticleGuide = {
+  title: "DSW Complete Return & Exchange Guide (2026)",
+  slug: "dsw-return-policy-complete-guide",
+  description: "Comprehensive 2026 breakdown of DSW's return policy: 60/90/365 day windows, in-store drop-offs, no-receipt lookups, clearance rules, and VIP perks.",
+  category: "how-to",
+  tags: [
+    "dsw",
+    "shoes",
+    "complete-guide",
+    "returns",
+    "vip-rewards"
+  ],
+  publishedAt: "2026-01-15",
+  updatedAt: "2026-08-01",
+  readingTime: "9 min",
+  heroImage: "/images/guides/dsw-return-policy-complete-guide.png",
+  author: "Marcus Vance",
+  relatedStores: [
+    "dsw",
+    "nike",
+    "nordstrom"
+  ],
+  relatedArticles: [
+    "dsw-return-policy-without-receipt",
+    "dsw-shoes-return-policy",
+    "dsw-avoid-return-shipping-fee"
+  ],
+  summary: "Everything you need to know about DSW return rules, 60/90-day guest/VIP windows, 365-day VIP Elite perks, and zero-fee in-store drop-offs.",
+  quickAnswer: "DSW gives 60 days for guests, 90 days for free VIP Club members, and 365 days for VIP Elite members. In-store returns are 100% free; mail returns cost $8.50 for non-VIPs but are free for all VIP members.",
+  verifiedSourceUrl: "https://www.dsw.com/en/us/legal/return-policy",
+  verifiedSourceDate: "2026-08-01",
+  factRows: [
+    {
+      label: "Guest Return Window",
+      value: "60 Days",
+      status: "yes"
+    },
+    {
+      label: "VIP Club Return Window",
+      value: "90 Days",
+      status: "yes"
+    },
+    {
+      label: "VIP Elite Window",
+      value: "365 Days",
+      status: "yes"
+    },
+    {
+      label: "In-Store Return Fee",
+      value: "$0 (100% Free)",
+      status: "yes"
+    },
+    {
+      label: "Mail Return Fee",
+      value: "$8.50 (Free for VIPs)",
+      status: "yes"
+    }
+  ],
+  sources: [
+    {
+      title: "DSW Official Return & Exchange Policy",
+      url: "https://www.dsw.com/en/us/legal/return-policy",
+      publisher: "Designer Brands Inc.",
+      dateAccessed: "2026-08-01"
+    }
+  ],
+  faqs: [
+    {
+      question: "Is DSW return free in-store?",
+      answer: "Yes, 100% free at all physical DSW warehouse stores nationwide."
+    },
+    {
+      question: "How long do I have to return items to DSW?",
+      answer: "Guests have 60 days, free VIP Club members get 90 days, and VIP Elite members get 365 days."
+    },
+    {
+      question: "Can I return clearance shoes to DSW?",
+      answer: "Yes, standard red-tag clearance items can be returned within your applicable window unless stamped Final Sale."
+    }
+  ],
+  steps: [
+    {
+      title: "Inspect Footwear & Box",
+      text: "Ensure shoes are unworn, clean, and placed in their original branded shoe box with tags."
+    },
+    {
+      title: "Locate Proof of Purchase",
+      text: "Bring paper receipt, order email confirmation, or provide your VIP phone number for register lookup."
+    },
+    {
+      title: "Visit Register or Generate Mail Label",
+      text: "Drop off in-store for an instant refund or use the online return portal to print a FedEx label."
+    }
+  ],
+  proseContent: `
+# DSW Complete Return & Exchange Guide (2026)
+
+Shopping for footwear online or in-store should come with absolute peace of mind. Designer Shoe Warehouse (DSW) maintains one of the most customer-friendly return policies in the shoe industry, especially for registered VIP rewards members.
+
+---
+
+## 1. DSW Return Window Policy
+
+DSW uses a tiered return window structure tied directly to your loyalty account status:
+
+| Customer Tier | Return Window | Late Return Period | Mail Shipping Fee |
+| :--- | :--- | :--- | :--- |
+| **Guest / Non-VIP** | 60 Days | 61–365 Days (Store Credit) | $8.50 Fee |
+| **DSW VIP Club (Free)** | 90 Days | 91–365 Days (Store Credit) | **FREE** |
+| **DSW VIP Gold** | 90 Days | 91–365 Days (Store Credit) | **FREE** |
+| **DSW VIP Elite** | **365 Days** | Full Year Original Payment | **FREE** |
+
+> **Pro Tip:** Signing up for a free DSW VIP account at checkout automatically upgrades your return window from 60 to 90 days and eliminates the $8.50 mail return shipping fee.
+
+---
+
+## 2. Returning Items Without a Paper Receipt
+
+If you misplace your receipt, DSW associates can quickly search digital records using:
+1. **VIP Rewards Phone Number or Email**
+2. **Debit or Credit Card Used at Register**
+3. **dsw.com Order Number from Email Confirmation**
+
+If no transaction record can be found, DSW may issue a merchandise credit at the item's lowest recent selling price upon presenting a valid government-issued photo ID.
+
+---
+
+## 3. Shoe Condition & Worn Footwear Exceptions
+
+To qualify for a standard refund, shoes must be **unworn and in resaleable condition** with original packaging.
+- **Indoor Testing:** Trying on shoes inside your home on carpet is 100% permitted.
+- **Outdoor Wear:** Footwear with scuffed soles, outdoor dirt, or creased leather cannot be returned for a change of mind.
+- **Manufacturing Defects:** Shoes exhibiting structural defects (split soles, broken zippers, detached heels) under normal use are eligible for a full replacement or refund.
+
+---
+
+## 4. Online Returns vs In-Store Drop-off
+
+| Return Channel | Return Fee | Refund Processing Speed | Box Requirement |
+| :--- | :--- | :--- | :--- |
+| **In-Store Drop-off** | **$0 (100% Free)** | Instant at Register | Shoe Box Only |
+| **Mail Return (VIP Member)** | **$0 (Free for VIPs)** | 5–7 Business Days | Outer Carton Required |
+| **Mail Return (Guest)** | $8.50 Fee Deducted | 5–7 Business Days | Outer Carton Required |
+
+---
+
+## Summary Checklist for DSW Shoppers
+
+- Always give your VIP phone number at the register.
+- Keep the original shoe box until you know the shoes fit comfortably.
+- Return online orders in-store to avoid shipping delays and get cash/card back instantly.
+`
+};
+

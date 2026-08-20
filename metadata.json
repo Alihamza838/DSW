@@ -1,0 +1,6 @@
+{
+  "name": "dswReturnRefund",
+  "description": "Verified return, refund, and exchange policies for major US stores — return windows, receipt rules, fees, and step-by-step instructions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

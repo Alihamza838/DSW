@@ -1,0 +1,24 @@
+{
+  "id": "target",
+  "name": "Target",
+  "brand": "Target",
+  "slug": "target",
+  "baseUrl": "https://www.target.com",
+  "currency": "USD",
+  "shipsTo": ["US"],
+  "country": "US",
+  "countryName": "United States",
+  "logo": "/logos/target.svg",
+  "category": ["department-stores", "clothing", "beauty"],
+  "lastVerified": "2026-07-01",
+  "officialPolicyUrl": "https://www.target.com/returns",
+  "metaDescription": "Target return policy: 90 days standard, 365 days for Target owned brand items.",
+  "quickAnswer": {
+    "returnWindow": "90 days (365 for Target-owned brands)",
+    "receiptRequired": false,
+    "restockingFee": false,
+    "refundMethod": "Original payment method or Target gift card",
+    "onlineReturns": true,
+    "inStoreReturns": true
+  }
+}

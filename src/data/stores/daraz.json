@@ -1,0 +1,24 @@
+{
+  "id": "daraz",
+  "name": "Daraz",
+  "brand": "Daraz",
+  "slug": "daraz",
+  "baseUrl": "https://www.daraz.pk",
+  "currency": "PKR",
+  "shipsTo": ["PK", "BD", "LK", "NP", "MM"],
+  "country": "PK",
+  "countryName": "Pakistan",
+  "logo": "/logos/daraz.svg",
+  "category": ["department-stores", "electronics", "fashion"],
+  "lastVerified": "2026-07-20",
+  "officialPolicyUrl": "https://www.daraz.pk/helpcenter/returns",
+  "metaDescription": "Daraz Pakistan & South Asia return policy: 14-day DarazMall return window, change of mind returns, and doorstep refund collection.",
+  "quickAnswer": {
+    "returnWindow": "14 Days (DarazMall) / 7 Days (Standard Seller)",
+    "receiptRequired": false,
+    "restockingFee": false,
+    "refundMethod": "Daraz Wallet, Bank Deposit, or JazzCash / EasyPaisa",
+    "onlineReturns": true,
+    "inStoreReturns": false
+  }
+}

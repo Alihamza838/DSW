@@ -1,0 +1,24 @@
+[
+  {
+    "id": "dsw-nike-air-max-pulse-001",
+    "name": "Nike Air Max Pulse Men's Running Sneakers",
+    "title": "Nike Air Max Pulse Men's Running Sneakers",
+    "storeId": "dsw",
+    "store": "DSW",
+    "storeSlug": "dsw",
+    "category": "Footwear",
+    "price": 109.99,
+    "originalPrice": "$150.00",
+    "salePrice": "$109.99",
+    "discount": "27% OFF",
+    "returnWindowDays": 90,
+    "returnPolicyWindow": "90 Days Return Window (365 Days for VIP Elite)",
+    "affiliateLink": "https://www.dsw.com/en/us/product/nike-air-max-pulse-sneaker/543210",
+    "affiliateUrl": "https://www.dsw.com/en/us/product/nike-air-max-pulse-sneaker/543210",
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=75",
+    "rating": 4.8,
+    "reviewsCount": 342,
+    "isTrending": true,
+    "description": "Versatile streetwear sneaker with responsive Air cushioning. Covered by DSW's 90-day return policy and free in-store drop off."
+  }
+]

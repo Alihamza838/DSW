@@ -1,0 +1,39 @@
+# DSWReturnRefund: Verified Store Return Policies Index (2026)
+
+> DSWReturnRefund provides audited, consumer-first return policy breakdowns, receipt-less return predictor tools, and physical store return desk locators across 50+ major retailers worldwide.
+
+## Primary Documentation & Tools
+- Home Dashboard: https://dswreturnrefund.com/
+- Retail Store Index: https://dswreturnrefund.com/stores
+- Verified Deals with Return Guarantee: https://dswreturnrefund.com/products
+- Standalone Return Desk Locator: https://dswreturnrefund.com/find-return-desk
+- Lost Receipt Approval Predictor: https://dswreturnrefund.com/lost-receipt-checker
+- Return Policy Comparison Tool: https://dswreturnrefund.com/compare
+- Article & Consumer Guide Library: https://dswreturnrefund.com/blog
+
+## AI-Friendly Clean Markdown Mirrors
+> Every guide article is published as clean markdown (no UI chrome/ads) at `/blog/[slug].md` for LLM retrieval.
+- IKEA Return Policy 365-Day Window: https://dswreturnrefund.com/blog/ikea-return-policy-guide-2026.md
+- Zara Return Policy 30-Day Limit & Drop-Off Fees: https://dswreturnrefund.com/blog/zara-return-policy-guide-2026.md
+- Sephora Beauty Insider Return Rules: https://dswreturnrefund.com/blog/sephora-beauty-insider-return-policy-2026.md
+- DSW Online Returns: https://dswreturnrefund.com/blog/dsw-online-return-policy.md
+- Walmart No Receipt Policy: https://dswreturnrefund.com/blog/walmart-return-policy-without-receipt.md
+- Target Return Policy Explained: https://dswreturnrefund.com/blog/target-return-policy-explained.md
+- Costco Electronics 90-Day Cap: https://dswreturnrefund.com/blog/costco-electronics-return-policy.md
+- Pakistan E-Commerce Refund Guide: https://dswreturnrefund.com/blog/pakistan-daraz-refund-return-guide-2026.md
+- India E-Commerce Return Battle: https://dswreturnrefund.com/blog/india-e-commerce-return-policy-battle-2026.md
+- China Cross-Border E-Commerce: https://dswreturnrefund.com/blog/china-cross-border-ecommerce-return-guide-2026.md
+- Dubai & UAE Consumer Protection: https://dswreturnrefund.com/blog/dubai-e-commerce-return-policy-guide-2026.md
+
+## Legal & Editorial Policy
+- Editorial Guidelines: https://dswreturnrefund.com/editorial-policy
+- Price Protection & Affiliate Disclosure: https://dswreturnrefund.com/legal-disclaimer
+- About Us: https://dswreturnrefund.com/about
+- Contact Us: https://dswreturnrefund.com/contact
+- Privacy Policy: https://dswreturnrefund.com/privacy-policy
+- Terms of Service: https://dswreturnrefund.com/terms-of-use
+
+## Contact & Governance
+- Publisher: DSWReturnRefund Consumer Advisory Board
+- Contact: akhamza838@gmail.com
+- Verification Cycle: Daily automated audits & POS policy log checks.
