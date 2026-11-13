@@ -123,22 +123,67 @@ h3 {
   border-radius: 0 12px 12px 0;
 }
 
-/* Gentle entrance for cards (transform only, no layout shift; off with reduced motion) */
-@supports (animation-timeline: view()) {
-  .rise {
-    animation: rise linear both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 60%;
-  }
+/* Scroll reveal (see ScrollEffects.tsx). Only active once JS adds .fx-ready, and never for
+   elements that were already on screen, so the static HTML is always fully visible. */
+.fx-ready .rise:not(.is-in),
+.fx-ready [data-reveal]:not(.is-in),
+.fx-ready [data-stagger] > :not(.is-in) {
+  opacity: 0;
+  transform: translateY(22px);
 }
-@keyframes rise {
+.fx-ready .rise,
+.fx-ready [data-reveal],
+.fx-ready [data-stagger] > * {
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.fx-ready [data-reveal="left"]:not(.is-in) {
+  transform: translateX(-22px);
+}
+.fx-ready [data-reveal="scale"]:not(.is-in) {
+  transform: scale(0.96);
+}
+/* Stagger children of a grid marked data-stagger */
+.fx-ready [data-stagger] > :nth-child(2) { transition-delay: 60ms; }
+.fx-ready [data-stagger] > :nth-child(3) { transition-delay: 120ms; }
+.fx-ready [data-stagger] > :nth-child(4) { transition-delay: 180ms; }
+.fx-ready [data-stagger] > :nth-child(5) { transition-delay: 240ms; }
+.fx-ready [data-stagger] > :nth-child(6) { transition-delay: 300ms; }
+
+/* Corner suggestion card */
+.toast-in {
+  animation: toast-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes toast-in {
   from {
-    transform: translateY(24px);
-  }
-  to {
-    transform: none;
+    opacity: 0;
+    transform: translateY(16px);
   }
 }
+
+/* Printing a policy page: just the policy, no navigation */
+@media print {
+  header,
+  footer,
+  .no-print,
+  [aria-label="Suggested country"] {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    font-size: 12pt;
+  }
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    word-break: break-all;
+  }
+  details > :not(summary) {
+    display: block !important;
+  }
+}
+
 /* Window bars on brand pages grow from the left once (transform only) */
 .bar-grow {
   transform-origin: left center;
@@ -153,6 +198,7 @@ h3 {
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .toast-in,
   .bar-grow {
     animation: none !important;
   }
@@ -162,8 +208,11 @@ h3 {
   html {
     scroll-behavior: auto;
   }
-  .rise {
-    animation: none !important;
+  .rise,
+  [data-reveal],
+  [data-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
   }
   *,
   *::before,

@@ -4,11 +4,13 @@ import Seo from "../Seo";
 import { breadcrumbSchema, faqSchema } from "../schema";
 import { Breadcrumbs, Container, CountryBadge, FactTable, FaqList, PolicyImage, Section, StoreCard, Timeline, WindowBadge, windowLabel } from "../ui";
 import DeadlineCalculator from "../DeadlineCalculator";
+import PolicyActions from "../PolicyActions";
+import { ReadingProgress } from "../ScrollEffects";
 import { categoryOf, formatDate, pairSlug, pairsFor, relatedStores, storeOg } from "../data";
 import { guidesForStore } from "../guides";
 import { AUTHORS, absoluteUrl, href } from "../config";
 import { NotFoundContent } from "./NotFoundPage";
-import { brandOfPolicy, brandStores, countryOfPolicy } from "../../data/countries";
+import { brandOfPolicy, brandStores, countryOfPolicy, inCountry } from "../../data/countries";
 
 export function clamp(text: string, max = 155) {
   // "&" is written as "&amp;" in the HTML, so each one costs 4 extra characters of the budget
@@ -33,6 +35,12 @@ export function storeTitle(p: VerifiedPolicy) {
 export function storeDescription(p: VerifiedPolicy) {
   const month = new Date(`${p.checked}T12:00:00Z`).toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" });
   return clamp(`${p.name} return policy, checked ${month} on the official site: ${p.headline}. ${p.exceptions[0] ?? p.facts[1]?.value ?? ""}`, 158);
+}
+
+/** A short reference like "GB-NEXT-261113": country, store and the date the policy was checked. */
+export function policyRef(p: VerifiedPolicy, code = "INT") {
+  const store = p.slug.replace(/-(uk|in|ae|uae|sa|de|fr|ca|au)$/, "").replace(/-/g, "").slice(0, 8).toUpperCase();
+  return `${code}-${store}-${p.checked.slice(2).replace(/-/g, "")}`;
 }
 
 function hostOf(url: string) {
@@ -67,6 +75,7 @@ export function Component() {
 
   return (
     <article>
+      <ReadingProgress />
       <Seo
         title={storeTitle(p)}
         description={storeDescription(p)}
@@ -112,6 +121,9 @@ export function Component() {
               </div>
               <p className="mt-5 text-lg text-ink-2">{p.summary}</p>
               <p className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-ink-3">
+                <span className="rounded-md border border-line bg-paper px-2 py-0.5 font-mono text-xs tracking-wider text-ink-2" title="Policy reference: country, store and date checked">
+                  Ref. {policyRef(p, country?.code)}
+                </span>
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 font-semibold text-emerald-800">
                   <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
                     <path d="m5 12 5 5L20 7" />
@@ -129,6 +141,9 @@ export function Component() {
                   </a>
                 </span>
               </p>
+              <div className="mt-5">
+                <PolicyActions title={`${p.name} return policy`} />
+              </div>
             </div>
             <PolicyImage p={p} eager />
           </div>
@@ -286,7 +301,7 @@ export function Component() {
             )}
             {country && (
               <div className="rounded-2xl border border-line bg-card p-5">
-                <p className="text-xs font-bold uppercase tracking-wider text-ink-3">Shopping in {country.name}?</p>
+                <p className="text-xs font-bold uppercase tracking-wider text-ink-3">Shopping in {inCountry(country)}?</p>
                 <Link to={href(`/countries/${country.slug}`)} className="mt-3 flex items-center gap-3 font-semibold text-brand-700 hover:underline">
                   <CountryBadge code={country.code} colors={country.badge} size="sm" />
                   All {country.name} store policies & your legal rights

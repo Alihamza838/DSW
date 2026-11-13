@@ -7,7 +7,7 @@
  */
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { COUNTRIES, COUNTRY_GROUPS, getCountry, storesInCountry, type Country } from "../data/countries";
+import { COUNTRIES, COUNTRY_GROUPS, getCountry, inCountry, storesInCountry, type Country } from "../data/countries";
 import { CountryBadge } from "./ui";
 import { href } from "./config";
 
@@ -100,5 +100,90 @@ export default function CountryPicker({ compact = false }: { compact?: boolean }
         })}
       </div>
     </div>
+  );
+}
+
+/**
+ * Best guess of the visitor's country from the browser's own time zone and language. Nothing is
+ * looked up online; it only decides which country page to suggest.
+ */
+const ZONE_TO_COUNTRY: [RegExp, string][] = [
+  [/^Europe\/(London|Belfast)$/, "united-kingdom"],
+  [/^Europe\/Berlin$/, "germany"],
+  [/^Europe\/Paris$/, "france"],
+  [/^Asia\/Karachi$/, "pakistan"],
+  [/^Asia\/(Kolkata|Calcutta)$/, "india"],
+  [/^Asia\/Dubai$/, "uae"],
+  [/^Asia\/Riyadh$/, "saudi-arabia"],
+  [/^Australia\//, "australia"],
+  [/^America\/(Toronto|Vancouver|Edmonton|Winnipeg|Halifax|St_Johns|Regina|Moncton|Whitehorse|Yellowknife|Iqaluit)$/, "canada"],
+  [/^(America\/(New_York|Chicago|Denver|Los_Angeles|Phoenix|Anchorage|Detroit|Boise|Indiana\/.+|Kentucky\/.+)|Pacific\/Honolulu)$/, "united-states"],
+];
+
+export function guessCountry(): Country | undefined {
+  try {
+    const zone = Intl.DateTimeFormat().resolvedOptions().timeZone ?? "";
+    const hit = ZONE_TO_COUNTRY.find(([re]) => re.test(zone));
+    return hit ? getCountry(hit[1]) : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+const DISMISS_KEY = "dswrr-suggest-dismissed";
+
+/** A small card in the corner (fixed position, so it never pushes the page around). */
+export function CountrySuggestion({ pathname }: { pathname: string }) {
+  const [c, setC] = useState<Country | undefined>();
+  useEffect(() => {
+    try {
+      if (window.localStorage.getItem(KEY) || window.localStorage.getItem(DISMISS_KEY)) return;
+    } catch {
+      return;
+    }
+    const g = guessCountry();
+    if (!g) return;
+    const t = window.setTimeout(() => setC(g), 1500);
+    return () => window.clearTimeout(t);
+  }, []);
+  if (!c || pathname.startsWith(`/countries/${c.slug}`)) return null;
+  const close = () => {
+    try {
+      window.localStorage.setItem(DISMISS_KEY, "1");
+    } catch {
+      /* ignore */
+    }
+    setC(undefined);
+  };
+  return (
+    <aside
+      aria-label="Suggested country"
+      className="toast-in fixed bottom-4 left-4 right-4 z-40 mx-auto max-w-md rounded-2xl border border-line bg-card p-4 shadow-2xl shadow-navy/20 sm:right-auto"
+    >
+      <div className="flex items-start gap-3">
+        <CountryBadge code={c.code} colors={c.badge} />
+        <div className="min-w-0 flex-1">
+          <p className="font-semibold text-ink">Shopping in {inCountry(c)}?</p>
+          <p className="text-sm text-ink-2">See local store policies and your legal rights there.</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <Link
+              to={href(`/countries/${c.slug}`)}
+              onClick={() => rememberCountry(c.slug)}
+              className="inline-flex min-h-[44px] items-center rounded-xl bg-brand-700 px-4 text-sm font-semibold text-white hover:bg-brand-800"
+            >
+              See local stores
+            </Link>
+            <Link to="/countries/" onClick={close} className="inline-flex min-h-[44px] items-center rounded-xl border border-line px-4 text-sm font-semibold text-ink-2 hover:border-brand-500">
+              Other country
+            </Link>
+          </div>
+        </div>
+        <button type="button" onClick={close} aria-label="Dismiss" className="-me-1 -mt-1 flex h-11 w-11 items-center justify-center rounded-xl text-ink-3 hover:bg-soft hover:text-ink">
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <path d="M6 6l12 12M18 6 6 18" />
+          </svg>
+        </button>
+      </div>
+    </aside>
   );
 }

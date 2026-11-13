@@ -129,7 +129,7 @@ export function FaqList({ faqs }: { faqs: PolicyFaq[] }) {
 export function Section({ id, title, children, intro }: { id?: string; title: string; children: ReactNode; intro?: string }) {
   return (
     <section id={id} aria-labelledby={id ? `${id}-h` : undefined} className="mt-12">
-      <h2 id={id ? `${id}-h` : undefined} className="text-2xl font-bold text-ink sm:text-[1.7rem]">
+      <h2 id={id ? `${id}-h` : undefined} data-reveal="left" className="text-2xl font-bold text-ink sm:text-[1.7rem]">
         {title}
       </h2>
       {intro && <p className="mt-2 max-w-3xl text-ink-2">{intro}</p>}

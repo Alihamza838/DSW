@@ -124,6 +124,13 @@ export const COMPARE_PAIRS: [string, string][] = [
   ["kmart-au", "target-au"],
   ["canadian-tire", "walmart-ca"],
   ["zalando", "asos"],
+  ["lowes", "home-depot"],
+  ["gap", "old-navy"],
+  ["wayfair", "ikea"],
+  ["tesco", "argos"],
+  ["otto", "zalando"],
+  ["extra", "jarir"],
+  ["limelight", "khaadi"],
 ];
 export const pairSlug = (a: string, b: string) => `${a}-vs-${b}`;
 export function parsePair(slug: string | undefined): [VerifiedPolicy, VerifiedPolicy] | undefined {

@@ -42,6 +42,11 @@ export function Component() {
         title="What the law gives you, country by country"
         intro="The store's own policy is usually more generous than the law, but the law is your floor. Each link opens the official government or regulator page."
       >
+        <p className="-mt-2 mb-4">
+          <Link to={href("/blog/return-rights-by-country-2026")} className="inline-block py-2 font-semibold text-brand-700 underline underline-offset-2">
+            Read the full guide: return rights by country in 2026
+          </Link>
+        </p>
         <div className="overflow-x-auto rounded-2xl border border-line bg-card">
           <table className="w-full min-w-[640px] text-left text-sm">
             <thead className="bg-soft text-ink">
