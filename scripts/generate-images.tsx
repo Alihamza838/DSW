@@ -55,7 +55,7 @@ function storeHtml(p: VerifiedPolicy) {
       <b>${t.day === 0 ? "Day 0" : `Day ${t.day}`}</b><span>${esc(t.label)}</span></div></div>`;
   });
   const single = pts.length < 2;
-  const big = p.windowDays === null ? (p.slug === "costco" ? "No set limit" : "Varies") : `${p.windowDays} days`;
+  const big = p.headline.startsWith("No change-of-mind") ? "No returns" : p.windowDays === null ? (p.slug === "costco" ? "No set limit" : "Varies") : `${p.windowDays} days`;
   return `<!doctype html><html><head><meta charset="utf-8"><style>${BASE_CSS}
 .k{position:absolute;left:64px;top:52px;font-size:22px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0f766e}
 h1{position:absolute;left:64px;top:92px;font-size:62px;font-weight:700;letter-spacing:-.01em}
@@ -73,7 +73,7 @@ h1{position:absolute;left:64px;top:92px;font-size:62px;font-weight:700;letter-sp
 </style></head><body><div class="paper"></div>
 <div class="k">${esc(p.country)} · Return policy</div>
 <h1 class="serif">${esc(p.name)}</h1>
-<div class="big"><b class="serif">${esc(big)}</b><span>main window</span></div>
+<div class="big"><b class="serif">${esc(big)}</b><span>${big === "No returns" ? "change of mind" : "main window"}</span></div>
 <p class="hl">${esc(p.headline)}</p>
 <div class="track">${marks}</div>
 <div class="chk">✓ Checked ${fmt(p.checked)} on the official site</div>
@@ -108,7 +108,7 @@ ${brand}</body></html>`;
 
 function compareHtml(a: VerifiedPolicy, b: VerifiedPolicy) {
   const box = (p: VerifiedPolicy) => {
-    const big = p.windowDays === null ? (p.slug === "costco" ? "No limit" : "Varies") : `${p.windowDays} days`;
+    const big = p.headline.startsWith("No change-of-mind") ? "No returns" : p.windowDays === null ? (p.slug === "costco" ? "No limit" : "Varies") : `${p.windowDays} days`;
     return `<div class="b"><p class="serif n">${esc(p.name)}</p><p class="serif d">${esc(big)}</p><p class="h">${esc(p.headline)}</p></div>`;
   };
   return `<!doctype html><html><head><meta charset="utf-8"><style>${BASE_CSS}

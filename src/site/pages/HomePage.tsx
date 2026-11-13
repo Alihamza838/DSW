@@ -2,14 +2,16 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Seo from "../Seo";
 import { faqSchema, organizationSchema, websiteSchema } from "../schema";
-import { Container, FaqList, Section, StoreCard } from "../ui";
+import { Container, CountryBadge, FaqList, Section, StoreCard, windowLabel } from "../ui";
 import { POLICIES, getPolicy } from "../../data/policies";
 import { CATEGORIES, COMPARE_PAIRS, formatDate, pairSlug, storesInCategory } from "../data";
 import { GUIDES } from "../guides";
 import { href } from "../config";
+import CountryPicker from "../CountryPicker";
+import { BRANDS, COUNTRIES, brandStores, countryOfPolicy } from "../../data/countries";
 
 const POPULAR = ["dsw", "walmart", "target", "amazon", "costco", "kohls", "nike", "sephora", "best-buy", "shein", "temu", "daraz"];
-const QUICK = ["dsw", "walmart", "target", "amazon", "nike", "shein"];
+const QUICK = ["dsw", "walmart", "amazon", "amazon-uk", "ikea-uk", "noon", "daraz", "flipkart"];
 
 const HOME_FAQS = [
   {
@@ -23,6 +25,10 @@ const HOME_FAQS = [
   {
     q: "What if the store's page says something different?",
     a: "The store's official policy always wins. Rules can change between our checks, so confirm the final details on the official page, and tell us so we can update the summary.",
+  },
+  {
+    q: "Do you cover stores outside the United States?",
+    a: "Yes. We cover stores in the US, UK, Germany, France, Canada, Australia, the UAE, Saudi Arabia, India and Pakistan. Each country page lists its stores, the legal rights there and the official consumer authority.",
   },
   {
     q: "Which store has the longest return window?",
@@ -41,7 +47,7 @@ export function Component() {
     <>
       <Seo
         title="Store Return Policies, Checked & Explained Simply"
-        description={`Return windows, receipt rules and fees for DSW, Walmart, Target, Amazon and ${POLICIES.length - 4} more stores, each checked against the official policy and dated.`}
+        description={`Return policies for ${POLICIES.length} stores in ${COUNTRIES.length} countries, from DSW, Walmart and Amazon to ASOS, noon and Daraz, each checked on the official site and dated.`}
         path="/"
         image="/og/default.jpg"
         jsonLd={[organizationSchema(), websiteSchema(), faqSchema(HOME_FAQS)]}
@@ -54,14 +60,14 @@ export function Component() {
           <div>
             <p className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-800">
               <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
-              {POLICIES.length} stores · last checked {formatDate(latestChecked)}
+              {POLICIES.length} stores · {COUNTRIES.length} countries · last checked {formatDate(latestChecked)}
             </p>
             <h1 className="mt-5 text-4xl font-bold leading-[1.1] text-ink sm:text-5xl">
               Store return policies, <span className="text-brand-700">checked and explained simply</span>
             </h1>
             <p className="mt-5 max-w-xl text-lg text-ink-2">
-              How many days you have, whether you need the receipt, and what it costs, for DSW and {POLICIES.length - 1} other stores. Every page is checked against the
-              store's own website and shows the date.
+              How many days you have, whether you need the receipt, and what it costs, for DSW and {POLICIES.length - 1} other stores in the US, UK, Europe, the Gulf,
+              India, Pakistan and beyond. Every page is checked against the store's own website and shows the date.
             </p>
             <form
               role="search"
@@ -120,6 +126,41 @@ export function Component() {
       </section>
 
       <Container>
+        <Section
+          id="where"
+          title="Where do you shop?"
+          intro="Pick your country to see local stores, what the law gives you there, and the official place to complain if a store says no."
+        >
+          <CountryPicker />
+        </Section>
+
+        <Section id="brand-abroad" title="Same brand, different rules" intro="A brand's return policy can change completely when you cross a border. Here is the main window for each country store.">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {BRANDS.slice(0, 6).map((b) => (
+              <Link key={b.slug} to={href(`/brands/${b.slug}`)} className="rise group block rounded-2xl border border-line bg-card p-5 transition hover:border-brand-500">
+                <span className="font-serif text-xl font-bold text-ink group-hover:text-brand-700">{b.name}</span>
+                <span className="mt-3 grid gap-1.5">
+                  {brandStores(b).map((p) => {
+                    const c = countryOfPolicy(p);
+                    return (
+                      <span key={p.slug} className="flex items-center gap-2 text-sm">
+                        {c && <CountryBadge code={c.code} colors={c.badge} size="sm" />}
+                        <span className="min-w-0 flex-1 text-ink-2">{c?.name ?? p.country}</span>
+                        <span className="font-semibold text-ink">{windowLabel(p).big}</span>
+                      </span>
+                    );
+                  })}
+                </span>
+              </Link>
+            ))}
+          </div>
+          <p className="mt-5">
+            <Link to="/brands/" className="inline-block py-2 font-semibold text-brand-700 underline underline-offset-2">
+              All {BRANDS.length} brands compared by country
+            </Link>
+          </p>
+        </Section>
+
         <Section title="How to use this site" intro="Three quick checks before you head back to the store.">
           <ol className="grid gap-4 md:grid-cols-3">
             {[

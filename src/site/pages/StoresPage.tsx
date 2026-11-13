@@ -5,6 +5,8 @@ import { breadcrumbSchema, itemListSchema } from "../schema";
 import { Breadcrumbs, Container, StoreCard } from "../ui";
 import { POLICIES, REGIONS } from "../../data/policies";
 import { CATEGORIES } from "../data";
+import { COUNTRIES } from "../../data/countries";
+import { CountryBadge } from "../ui";
 import { href } from "../config";
 
 export function Component() {
@@ -32,7 +34,7 @@ export function Component() {
     <Container className="py-8 sm:py-10">
       <Seo
         title={`Store Return Policies: ${POLICIES.length} Retailers Checked`}
-        description={`Return windows, receipt rules and fees for ${POLICIES.length} stores in the US, Canada, UK, Australia, the UAE, Pakistan and India, each checked on the official site.`}
+        description={`Return windows, receipt rules and fees for ${POLICIES.length} stores in the US, UK, Europe, Canada, Australia, the Gulf, India and Pakistan, each checked on the official site.`}
         path="/stores"
         jsonLd={[breadcrumbSchema(crumbs), itemListSchema("Store return policies", POLICIES.map((p) => ({ name: `${p.name} return policy`, path: `/stores/${p.slug}` })))]}
       />
@@ -41,6 +43,19 @@ export function Component() {
       <p className="mt-3 max-w-3xl text-lg text-ink-2">
         {POLICIES.length} stores, each summarised from its own official returns page and dated, so you know how fresh the information is.
       </p>
+
+      <nav aria-label="Browse by country" className="mt-5">
+        <ul className="flex flex-wrap gap-2">
+          {COUNTRIES.map((c) => (
+            <li key={c.slug}>
+              <Link to={href(`/countries/${c.slug}`)} className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-line bg-card py-1 pl-1.5 pr-4 text-sm font-semibold text-ink-2 hover:border-brand-500 hover:text-brand-700">
+                <CountryBadge code={c.code} colors={c.badge} size="sm" />
+                {c.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
       <div className="mt-6 rounded-2xl border border-line bg-card p-4">
         <label className="block">

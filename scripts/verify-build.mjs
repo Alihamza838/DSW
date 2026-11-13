@@ -74,7 +74,7 @@ for (const p of indexable) {
   const want = `${SITE}${p.route}`;
   if (p.canonical !== want) errors.push(`${p.route}: canonical "${p.canonical}" (expected ${want})`);
   // Content pages need substance; short legal/contact pages only a minimum
-  const minWords = /^\/(stores|blog|compare)\/|^\/$/.test(p.route) ? 250 : 150;
+  const minWords = /^\/(stores|blog|compare|countries|brands)\/|^\/$/.test(p.route) ? 250 : 150;
   if (p.words < minWords) errors.push(`${p.route}: only ${p.words} words (min ${minWords})`);
   if (seen.title.has(t)) errors.push(`duplicate title "${t}": ${seen.title.get(t)} and ${p.route}`);
   seen.title.set(t, p.route);

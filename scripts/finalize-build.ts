@@ -69,9 +69,11 @@ ${indexable.map((p) => `  <url>\n    <loc>${p.url}</loc>\n    <lastmod>${p.lastm
       .join("\n")}\n`;
   const llms = `# DSWReturnRefund
 
-> Independent, plain-English summaries of store return and refund policies (DSW, Walmart, Target, Amazon and others). Each store page is checked against the retailer's official policy page, shows the date it was checked and links to the source. Not affiliated with any retailer.
+> Independent, plain-English summaries of store return and refund policies (DSW, Walmart, Target, Amazon and others) across the US, UK, Europe, Canada, Australia, the UAE, Saudi Arabia, India and Pakistan. Each store page is checked against the retailer's official policy page, shows the date it was checked and links to the source. Not affiliated with any retailer.
 
 ${section("Store return policies", "/stores/")}
+${section("Return policies by country", "/countries/")}
+${section("Same brand in different countries", "/brands/")}
 ${section("Comparisons", "/compare/")}
 ${section("Guides", "/blog/")}`;
   fs.writeFileSync(path.join(distDir, "llms.txt"), llms);
