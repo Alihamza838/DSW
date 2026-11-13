@@ -1,18 +1,396 @@
 {
-  "version": 2,
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": true,
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "framework": "vite",
-  "rewrites": [
+  "framework": null,
+  "redirects": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.dswreturnrefund.com"
+        }
+      ],
+      "destination": "https://dswreturnrefund.com/:path*",
+      "permanent": true
     },
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/blog/dsw-vip-rewards-return-policy-perks-guide(/?)",
+      "destination": "/stores/dsw/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/dsw-in-store-exchanges-and-clearance-rack-returns-guide(/?)",
+      "destination": "/stores/dsw/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/dsw-online-return-policy(/?)",
+      "destination": "/stores/dsw/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/dsw-return-policy-with-receipt(/?)",
+      "destination": "/stores/dsw/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/dsw-return-policy-complete-guide(/?)",
+      "destination": "/stores/dsw/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/dsw-return-policy-without-receipt(/?)",
+      "destination": "/stores/dsw/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/dsw-shoes-return-policy(/?)",
+      "destination": "/stores/dsw/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/dsw-avoid-return-shipping-fee(/?)",
+      "destination": "/stores/dsw/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/target-return-policy-guide-2026(/?)",
+      "destination": "/stores/target/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/target-return-policy-explained(/?)",
+      "destination": "/stores/target/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/nike-return-policy-guide-2026(/?)",
+      "destination": "/stores/nike/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/shein-return-policy-guide-2026(/?)",
+      "destination": "/stores/shein/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/temu-return-policy-guide-2026(/?)",
+      "destination": "/stores/temu/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/lululemon-return-policy-guide-2026(/?)",
+      "destination": "/stores/lululemon/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ikea-return-policy-guide-2026(/?)",
+      "destination": "/stores/ikea/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/zara-return-policy-guide-2026(/?)",
+      "destination": "/stores/zara/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/sephora-beauty-insider-return-policy-2026(/?)",
+      "destination": "/stores/sephora/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/american-eagle-return-policy(/?)",
+      "destination": "/stores/american-eagle/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ulta-return-exchange-policy(/?)",
+      "destination": "/stores/ulta/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/amazon-return-policy-guide(/?)",
+      "destination": "/stores/amazon/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/amazon-drop-off-kohl-ups-return-guide-2026(/?)",
+      "destination": "/stores/amazon/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/adidas-puma-return-policy-footwear-guide(/?)",
+      "destination": "/stores/adidas/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/apple-store-tech-electronics-return-policy-guide(/?)",
+      "destination": "/stores/apple/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/best-buy-return-policy-open-box(/?)",
+      "destination": "/stores/best-buy/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/costco-electronics-return-policy(/?)",
+      "destination": "/stores/costco/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/home-depot-plant-return-policy(/?)",
+      "destination": "/stores/home-depot/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/home-depot-appliance-return-policy(/?)",
+      "destination": "/stores/home-depot/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/pakistan-daraz-refund-return-guide-2026(/?)",
+      "destination": "/stores/daraz/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/dubai-e-commerce-return-policy-guide-2026(/?)",
+      "destination": "/stores/noon/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ksa-consumer-protection-return-guide-2026(/?)",
+      "destination": "/stores/noon/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/canada-retail-return-laws-guide-2026(/?)",
+      "destination": "/stores/walmart-ca/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/walmart-return-policy-without-receipt(/?)",
+      "destination": "/blog/return-without-receipt-store-rules/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/nike-return-policy-worn-shoes(/?)",
+      "destination": "/blog/can-you-return-worn-shoes/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/sephora-ulta-return-policy-compared(/?)",
+      "destination": "/compare/sephora-vs-ulta/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/asia-cross-border-ecommerce-returns-2026(/?)",
+      "destination": "/compare/temu-vs-aliexpress/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/fast-fashion-tjmaxx-marshalls-oldnavy-hm-zara-return-policy(/?)",
+      "destination": "/stores/category/clothing-fashion/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/footwear-sneaker-return-policy-footlocker-nike-dsw-nordstrom(/?)",
+      "destination": "/stores/category/shoes-sneakers/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/department-stores-kohls-macys-dillards-loft-return-policy(/?)",
+      "destination": "/stores/category/department-stores/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/global-marketplaces-ebay-etsy-aliexpress-carrefour-returns-guide(/?)",
+      "destination": "/stores/category/online-marketplaces/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/south-asia-daraz-flipkart-myntra-ajio-khaadi-returns-guide(/?)",
+      "destination": "/stores/category/online-marketplaces/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/india-top-retailer-returns-guide-2026(/?)",
+      "destination": "/stores/category/online-marketplaces/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/india-e-commerce-return-policy-battle-2026(/?)",
+      "destination": "/compare/flipkart-vs-myntra/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/dillards-return-policy(/?)",
+      "destination": "/stores/category/department-stores/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/loft-return-policy(/?)",
+      "destination": "/stores/category/clothing-fashion/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/halara-return-policy(/?)",
+      "destination": "/stores/category/clothing-fashion/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2026-return-policy-trends(/?)",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ftc-affiliate-disclosure-price-protection-guide(/?)",
+      "destination": "/disclaimer/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/capcut-pro-refund-subscription-policy(/?)",
+      "destination": "/stores/capcut-pro/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/capcut-policy(/?)",
+      "destination": "/stores/capcut-pro/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/best-capcut-alternatives-and-safe-downloads(/?)",
+      "destination": "/stores/capcut-pro/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/capcut-auto-captions-guide-and-faq(/?)",
+      "destination": "/stores/capcut-pro/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/capcut-beginners-guide-free-vs-pro(/?)",
+      "destination": "/stores/capcut-pro/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/capcut-best-export-settings-youtube(/?)",
+      "destination": "/stores/capcut-pro/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/capcut-keyframe-animation-guide(/?)",
+      "destination": "/stores/capcut-pro/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/capcut-how-to-remove-watermark-guide(/?)",
+      "destination": "/stores/capcut-pro/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/capcut-templates-and-transparent-logo-png-guide(/?)",
+      "destination": "/stores/capcut-pro/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/capcut-troubleshooting-and-crash-fixes(/?)",
+      "destination": "/stores/capcut-pro/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/capcut-vs-adobe-premiere-rush-comparison(/?)",
+      "destination": "/stores/capcut-pro/",
+      "permanent": true
+    },
+    {
+      "source": "/return-policies(/?)",
+      "destination": "/stores/",
+      "permanent": true
+    },
+    {
+      "source": "/by-country(/?)",
+      "destination": "/stores/",
+      "permanent": true
+    },
+    {
+      "source": "/store-comparisons(/?)",
+      "destination": "/compare/",
+      "permanent": true
+    },
+    {
+      "source": "/find-return-desk(/?)",
+      "destination": "/stores/",
+      "permanent": true
+    },
+    {
+      "source": "/products(/?)",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/deals(/?)",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/sitemap(/?)",
+      "destination": "/stores/",
+      "permanent": true
+    },
+    {
+      "source": "/compare-stores(/?)",
+      "destination": "/compare/",
+      "permanent": true
+    },
+    {
+      "source": "/compare-policies(/?)",
+      "destination": "/compare/",
+      "permanent": true
+    },
+    {
+      "source": "/policy-comparer(/?)",
+      "destination": "/compare/",
+      "permanent": true
+    },
+    {
+      "source": "/policy-comparison(/?)",
+      "destination": "/compare/",
+      "permanent": true
+    },
+    {
+      "source": "/stores/compare(/?)",
+      "destination": "/compare/",
+      "permanent": true
+    },
+    {
+      "source": "/legal-disclaimer(/?)",
+      "destination": "/disclaimer/",
+      "permanent": true
+    },
+    {
+      "source": "/privacy-policy(/?)",
+      "destination": "/privacy/",
+      "permanent": true
+    },
+    {
+      "source": "/terms-of-use(/?)",
+      "destination": "/terms/",
+      "permanent": true
+    },
+    {
+      "source": "/editorial(/?)",
+      "destination": "/editorial-policy/",
+      "permanent": true
+    },
+    {
+      "source": "/guides/:slug",
+      "destination": "/blog/:slug/",
+      "permanent": true
     }
   ],
   "headers": [
@@ -26,11 +404,20 @@
       ]
     },
     {
-      "source": "/images/(.*)",
+      "source": "/(images|og)/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=604800"
+          "value": "public, max-age=2592000, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
         }
       ]
     },
@@ -42,12 +429,16 @@
           "value": "nosniff"
         },
         {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
         }
       ]
     }

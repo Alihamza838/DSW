@@ -1,13 +1,13 @@
 {
-  "name": "dswReturnRefund",
-  "short_name": "dswReturnRefund",
-  "description": "Verified store return and refund policies: return windows, receipt rules, and step-by-step instructions.",
+  "name": "DSWReturnRefund",
+  "short_name": "ReturnRefund",
+  "description": "Store return policies, checked against each retailer’s official site and explained simply.",
   "start_url": "/",
   "id": "/",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#FAF9F6",
-  "theme_color": "#EF4444",
+  "background_color": "#FBFAF7",
+  "theme_color": "#0D9488",
   "icons": [
     {
       "src": "/icon-48.png",
@@ -86,28 +86,28 @@
     {
       "name": "DSW Policy Guide",
       "short_name": "DSW Policy",
-      "description": "DSW 90-day return window and VIP perks guide",
+      "description": "Store return policies, checked against each retailer’s official site and explained simply.",
       "url": "/",
       "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
     },
     {
       "name": "All Store Guides",
       "short_name": "Stores",
-      "description": "Browse 50+ retail return policy guides",
+      "description": "Store return policies, checked against each retailer’s official site and explained simply.",
       "url": "/stores",
       "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
     },
     {
       "name": "Consumer Guides & Blog",
       "short_name": "Blog",
-      "description": "Store return tips, receipt lookups, and guides",
+      "description": "Store return policies, checked against each retailer’s official site and explained simply.",
       "url": "/blog",
       "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
     },
     {
       "name": "Contact Compliance Desk",
       "short_name": "Contact",
-      "description": "Direct editorial and WhatsApp support desk",
+      "description": "Store return policies, checked against each retailer’s official site and explained simply.",
       "url": "/contact",
       "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
     }
