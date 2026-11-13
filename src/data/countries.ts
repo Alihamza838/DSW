@@ -27,6 +27,8 @@ export interface Country {
   law: string[];
   authority: CountryLink & { note: string };
   extraLinks?: CountryLink[];
+  /** How shoppers here usually buy and return, turned into practical tips (from the store data) */
+  habits: { title: string; tip: string }[];
   faqs: { q: string; a: string }[];
 }
 
@@ -51,6 +53,12 @@ export const COUNTRIES: Country[] = [
       url: "https://consumer.ftc.gov/articles/solving-problems-business-returns-refunds-and-other-resolutions",
       note: "Official US consumer advice on returns, refunds and how to complain.",
     },
+    habits: [
+      { title: "Receipts are often optional", tip: "Many US stores (Kohl's, Macy's, Old Navy) can find a purchase from your card or rewards account. Pay by card and join the free program." },
+      { title: "Holiday shopping starts in October", tip: "Walmart, Kohl's and Amazon stretch deadlines to January 31 for purchases from October or November, so early gifts are safe." },
+      { title: "Electronics get the short window", tip: "Big-box stores give 90 days on most things but 14\u201330 days on phones and electronics. Check the category line." },
+      { title: "Mail returns can cost money", tip: "Gap charges $6, Zara $4.95 by drop-off. Returning in a store is almost always free." },
+    ],
     faqs: [
       { q: "Is there a legal right to return items in the US?", a: "Not for a change of mind. US stores set their own return policies; the FTC Cooling-Off Rule only covers certain door-to-door and temporary-location sales." },
       { q: "Which US store has the longest return window?", a: "Of the stores we cover, Costco: most items have no fixed limit. IKEA US gives 365 days for unopened products." },
@@ -78,6 +86,12 @@ export const COUNTRIES: Country[] = [
       note: "Official UK government guide to your rights when you buy goods.",
     },
     extraLinks: [{ name: "Citizens Advice: consumer help", url: "https://www.citizensadvice.org.uk/consumer/" }],
+    habits: [
+      { title: "Click & Collect and in-store returns", tip: "UK shoppers return online orders at the shop: free at Zara, H&M and JD Sports, and Primark has no postal returns at all." },
+      { title: "Loyalty cards double as receipts", tip: "Tesco can find a purchase on your Clubcard for 30 days. Keep the card scanned at the till." },
+      { title: "Sale items get less time", tip: "Next gives 7 days on sale and clearance, M&S and H&M 14. Full-price items get 28\u201330." },
+      { title: "You always have 14 days online", tip: "Even if a store's policy is stricter, the Consumer Contracts Regulations give 14 days to cancel most online orders." },
+    ],
     faqs: [
       { q: "How long do I have to return an online order in the UK?", a: "At least 14 days after delivery under the cancellation right. Many stores give more: ASOS and Next 28 days, John Lewis 30, Boots 35, IKEA UK 365." },
       { q: "Can I return something bought in a UK shop if I changed my mind?", a: "Only if the store's policy allows it; there's no legal right for in-store change-of-mind returns. Most big UK stores do accept them." },
@@ -104,6 +118,11 @@ export const COUNTRIES: Country[] = [
       url: "https://ised-isde.canada.ca/site/office-consumer-affairs/en/business-practices-and-consumer-concerns/refund-and-exchange",
       note: "Government of Canada guidance on store refund and exchange policies.",
     },
+    habits: [
+      { title: "Keep the box sealed", tip: "Canadian Tire and Best Buy Canada want unopened items or charge restocking fees on some opened ones." },
+      { title: "Card purchases can be looked up", tip: "Canadian Tire finds card purchases for 90 days if the receipt is lost." },
+      { title: "Holiday deadlines run into January", tip: "Best Buy Canada extends purchases from November 2 until January 10, 2027." },
+    ],
     faqs: [
       { q: "Do Canadian stores have to give refunds?", a: "Not for items that aren't defective. Each store sets its own policy, so read it before you buy." },
       { q: "Which Canadian store has the longest return window?", a: "Of the stores we cover, Canadian Tire: 90 days for most unopened items with a receipt." },
@@ -130,6 +149,11 @@ export const COUNTRIES: Country[] = [
       url: "https://www.accc.gov.au/consumers/problem-with-a-product-or-service-you-bought/repair-replace-refund-cancel",
       note: "Australian Competition and Consumer Commission guide to consumer guarantees.",
     },
+    habits: [
+      { title: "OnePass means a year", tip: "Kmart and Target Australia give OnePass members up to 365 days for change-of-mind returns." },
+      { title: "Unwrapping can cost 20%", tip: "JB Hi-Fi wants unopened items; unpacked-but-unused ones may carry a 20% fee." },
+      { title: "Faults are a separate right", tip: "Whatever the change-of-mind policy says, the Australian Consumer Law covers faulty products." },
+    ],
     faqs: [
       { q: "Is change of mind a legal right in Australia?", a: "No, but if a store has a change-of-mind policy it must follow it. Faulty goods are always covered by the Australian Consumer Law." },
       { q: "Which Australian store gives the longest change-of-mind window?", a: "Kmart and Target Australia give OnePass members up to 365 days; everyone else gets 60 days at Kmart." },
@@ -156,6 +180,12 @@ export const COUNTRIES: Country[] = [
       url: "https://consumerhelpline.gov.in/public/",
       note: "File a complaint online or call 1915 / 1800-11-4000.",
     },
+    habits: [
+      { title: "Read the product page, not the FAQ", tip: "Amazon India, Meesho and Tata CLiQ set return windows per item. The line next to the price is the rule that applies." },
+      { title: "Cash on delivery refunds go to a bank", tip: "Nykaa and other platforms refund COD orders by bank transfer, so keep your account details ready." },
+      { title: "Record the unboxing", tip: "Croma wants delivery damage reported within 48 hours; a video makes a replacement claim easy." },
+      { title: "Store balance is fastest", tip: "Meesho Balance refunds in up to 2 business days, against 3\u20137 for cards or UPI." },
+    ],
     faqs: [
       { q: "How many days do Indian online stores give for returns?", a: "It depends on the category: Amazon India often 7 days, H&M India 15, Nykaa 15, Zara India and Tata CLiQ apparel 30." },
       { q: "Where can I complain about an online refund in India?", a: "Contact the seller's grievance officer first, then the National Consumer Helpline (1915 or consumerhelpline.gov.in)." },
@@ -181,6 +211,12 @@ export const COUNTRIES: Country[] = [
       url: "https://pcpc.punjab.gov.pk/guidelines",
       note: "Official guidance on notices and Consumer Court claims in Punjab.",
     },
+    habits: [
+      { title: "Check the parcel the day it arrives", tip: "J. gives 3 days, Gul Ahmed wants notice within 3 days and Limelight wants damage reported in 2 working days." },
+      { title: "Expect an exchange, not cash", tip: "Outfitters, Limelight, Gul Ahmed and Bonanza Satrangi exchange or give credit; cash refunds are rare." },
+      { title: "Sale means final", tip: "Most brands (Sapphire, Limelight, Bonanza Satrangi) don't take back sale items at all." },
+      { title: "Requests often go by WhatsApp or email", tip: "Limelight accepts exchange requests by WhatsApp, SMS or email. Keep the paper invoice from the parcel." },
+    ],
     faqs: [
       { q: "Do Pakistani clothing brands give cash refunds?", a: "Mostly not. Outfitters and Gul Ahmed give exchanges, and Sapphire usually gives store credit." },
       { q: "Which brand has the shortest return window in Pakistan?", a: "J. (Junaid Jamshed): 3 days from delivery to claim a return or exchange." },
@@ -207,6 +243,11 @@ export const COUNTRIES: Country[] = [
       url: "https://u.ae/en/information-and-services/justice-safety-and-the-law/consumer-protection",
       note: "Ministry of Economy consumer line: 800 1222.",
     },
+    habits: [
+      { title: "Don't cut the security tag", tip: "Namshi can reject a return or deduct up to 30% if the tag is removed." },
+      { title: "Unopened is the rule", tip: "IKEA UAE and Sephora UAE accept unopened items only; Sharaf DG charges a restocking fee on opened ones." },
+      { title: "Keep the invoice", tip: "Centrepoint, IKEA UAE and Sephora UAE ask for the invoice and original packaging." },
+    ],
     faqs: [
       { q: "How long do UAE stores give for returns?", a: "Usually 14 days: Namshi, Centrepoint, Sharaf DG and Sephora UAE all use 14 days; Amazon.ae gives 15 for most items." },
       { q: "Can I return opened items in the UAE?", a: "Often not for a change of mind. Sephora UAE wants unopened products, and Sharaf DG charges a restocking fee on opened items." },
@@ -233,6 +274,11 @@ export const COUNTRIES: Country[] = [
       url: "https://mc.gov.sa/en/guides/Documents/CustomerGuide.pdf",
       note: "Official consumer guide (PDF). Complaints: 1900.",
     },
+    habits: [
+      { title: "Online beats showroom", tip: "eXtra gives 14 days for website orders against 7 in the showroom." },
+      { title: "Electronics are mostly final", tip: "Jarir and eXtra exclude phones, computers and games unless defective." },
+      { title: "Ask for the policy", tip: "A Saudi store with a return policy must follow it; a store without one may not refuse returns." },
+    ],
     faqs: [
       { q: "Do Saudi stores have to accept returns?", a: "A store that has a return policy must follow it, and one without a policy may not refuse returns or exchanges." },
       { q: "How long does Amazon.sa give for returns?", a: "15 days for most items, 30 for some categories such as TVs and large appliances." },
@@ -259,6 +305,11 @@ export const COUNTRIES: Country[] = [
       url: "https://europa.eu/youreurope/citizens/consumers/shopping/guarantees-returns/index_en.htm",
       note: "Official EU guide to the 14-day withdrawal right and the 2-year guarantee.",
     },
+    habits: [
+      { title: "Free 30 days is common", tip: "Zalando and OTTO both give 30 free days, on top of the 14-day legal withdrawal." },
+      { title: "In-store needs a card", tip: "MediaMarkt only accepts in-store returns from myMediaMarkt members." },
+      { title: "Christmas orders get until January", tip: "OTTO gives orders since 1 November until 31 January 2027." },
+    ],
     faqs: [
       { q: "How long do I have to return an online order in Germany?", a: "At least 14 days from receipt. Zalando and many Amazon.de categories give 30 days." },
       { q: "Can I return something bought in a German shop?", a: "There's no legal right for in-store purchases; MediaMarkt, for example, gives 30 days only to myMediaMarkt members." },
@@ -284,6 +335,11 @@ export const COUNTRIES: Country[] = [
       url: "https://europa.eu/youreurope/citizens/consumers/shopping/guarantees-returns/index_en.htm",
       note: "Official EU guide to the 14-day withdrawal right and the 2-year guarantee.",
     },
+    habits: [
+      { title: "Account holders get far more time", tip: "Decathlon gives up to 365 days with a free account, 30 without." },
+      { title: "Drop it at the store", tip: "Fnac store drop-off is free and refunds are immediate; posting it back is at your cost." },
+      { title: "Holiday returns until mid-January", tip: "Fnac purchases from 1 November to 31 December 2026 can come back until 15 January 2027." },
+    ],
     faqs: [
       { q: "How long is the return period for online orders in France?", a: "At least 14 days from receipt under EU rules." },
       { q: "Which French store has the longest return window?", a: "Of the stores we cover, Decathlon: up to 365 days with a free Decathlon account." },
@@ -291,6 +347,9 @@ export const COUNTRIES: Country[] = [
     ],
   },
 ];
+
+/** "the United Kingdom", "the United Arab Emirates", but "India" */
+export const inCountry = (c: Country) => (/^United /.test(c.name) ? `the ${c.name}` : c.name);
 
 export const COUNTRY_GROUPS: Country["group"][] = ["North America", "Europe", "Gulf", "South Asia", "Oceania"];
 

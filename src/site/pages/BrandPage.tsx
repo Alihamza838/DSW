@@ -100,7 +100,7 @@ export function Component() {
         </Section>
 
         <Section id="side-by-side" title={`${b.name} rules side by side`}>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3" data-stagger>
             {stores.map((p) => {
               const c = countryOfPolicy(p);
               return (

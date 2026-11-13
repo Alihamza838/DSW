@@ -4,7 +4,7 @@ import Seo from "../Seo";
 import { breadcrumbSchema, faqSchema, itemListSchema } from "../schema";
 import { Breadcrumbs, Container, CountryBadge, FaqList, Section, StoreCard, windowLabel } from "../ui";
 import { rememberCountry } from "../CountryPicker";
-import { COUNTRIES, BRANDS, brandStores, getCountry, globalStores, storesInCountry } from "../../data/countries";
+import { COUNTRIES, BRANDS, brandStores, getCountry, globalStores, inCountry, storesInCountry } from "../../data/countries";
 import { formatDate } from "../data";
 import { href } from "../config";
 import { clamp } from "./StorePage";
@@ -59,7 +59,7 @@ export function Component() {
             <CountryBadge code={c.code} colors={c.badge} size="lg" />
             <div className="min-w-0">
               <p className="text-sm font-semibold uppercase tracking-wider text-brand-700">{c.group}</p>
-              <h1 className="text-3xl font-bold text-ink sm:text-[2.6rem]">Store return policies in {c.name}</h1>
+              <h1 className="text-3xl font-bold text-ink sm:text-[2.6rem]">Store return policies in {inCountry(c)}</h1>
             </div>
           </div>
           <p className="mt-5 max-w-3xl text-lg text-ink-2">{c.intro}</p>
@@ -70,7 +70,7 @@ export function Component() {
       </div>
 
       <Container className="pb-8">
-        <Section id="at-a-glance" title={`Return windows in ${c.name} at a glance`} intro="Sorted from the longest main window to the shortest. Tap a store for exceptions, steps and a deadline calculator.">
+        <Section id="at-a-glance" title={`Return windows in ${inCountry(c)} at a glance`} intro="Sorted from the longest main window to the shortest. Tap a store for exceptions, steps and a deadline calculator.">
           <div className="overflow-x-auto rounded-2xl border border-line bg-card">
             <table className="w-full min-w-[560px] text-left text-sm">
               <thead className="bg-soft text-ink">
@@ -104,7 +104,21 @@ export function Component() {
           </div>
         </Section>
 
-        <Section id="rights" title={`Your legal rights in ${c.name}`}>
+        <Section id="habits" title={`How returns work in practice in ${inCountry(c)}`} intro="What local shoppers run into most, drawn from the store policies on this page.">
+          <ul className="grid gap-4 sm:grid-cols-2" data-stagger>
+            {c.habits.map((h, i) => (
+              <li key={h.title} className="flex gap-4 rounded-2xl border border-line bg-card p-5">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-50 font-mono text-sm font-bold text-brand-800">{String(i + 1).padStart(2, "0")}</span>
+                <span>
+                  <span className="block font-serif text-lg font-bold text-ink">{h.title}</span>
+                  <span className="mt-1 block text-ink-2">{h.tip}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Section>
+
+        <Section id="rights" title={`Your legal rights in ${inCountry(c)}`}>
           <div className="grid gap-5 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
             <ul className="space-y-2.5">
               {c.law.map((l) => (
@@ -125,13 +139,16 @@ export function Component() {
                   {l.name}
                 </a>
               ))}
+              <Link to={href("/blog/return-rights-by-country-2026")} className="mt-3 block text-sm font-semibold text-brand-800 underline underline-offset-2">
+                Compare return rights in every country
+              </Link>
               <p className="mt-4 text-xs text-brand-900">This is a plain-language summary, not legal advice.</p>
             </aside>
           </div>
         </Section>
 
         <Section id="stores" title={`All ${c.name} stores we cover`}>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-stagger>
             {stores.map((p) => (
               <StoreCard key={p.slug} p={p} />
             ))}
@@ -170,7 +187,7 @@ export function Component() {
           </ul>
         </Section>
 
-        <Section id="faq" title={`Returns in ${c.name}: common questions`}>
+        <Section id="faq" title={`Returns in ${inCountry(c)}: common questions`}>
           <FaqList faqs={c.faqs} />
         </Section>
 

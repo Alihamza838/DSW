@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom";
+import { ReadingProgress } from "../ScrollEffects";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import type { ReactNode } from "react";
@@ -29,6 +30,7 @@ export function Component() {
 
   return (
     <article>
+      <ReadingProgress />
       <Seo
         title={g.title}
         description={g.description}

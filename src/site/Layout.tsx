@@ -6,6 +6,9 @@ import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-do
 import { POLICIES } from "../data/policies";
 import { CATEGORIES } from "./data";
 import { COUNTRIES } from "../data/countries";
+import { ScrollEffects } from "./ScrollEffects";
+import { CountrySuggestion } from "./CountryPicker";
+import { formatDate } from "./data";
 import { SITE_NAME, href } from "./config";
 import { Container } from "./ui";
 
@@ -17,6 +20,8 @@ const NAV = [
   { to: "/blog/", label: "Guides" },
 ];
 const FOOTER_STORES = ["dsw", "walmart", "target", "amazon", "costco", "nike", "amazon-uk", "asos", "amazon-ae", "noon", "daraz", "flipkart"];
+
+const LATEST = POLICIES.reduce((m, p) => (p.checked > m ? p.checked : m), "");
 
 function Logo() {
   return (
@@ -88,9 +93,26 @@ export default function Layout() {
   return (
     <div className="flex min-h-screen flex-col">
       <ScrollToTop />
+      <ScrollEffects />
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:shadow">
         Skip to content
       </a>
+      <div className="bg-navy text-slate-300">
+        <Container className="flex min-h-9 flex-wrap items-center justify-between gap-x-4 gap-y-1 py-1.5 text-xs">
+          <p className="flex items-center gap-2">
+            <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0 text-brand-300" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z" />
+              <path d="m9 12 2 2 4-4" />
+            </svg>
+            <span>
+              Independent consumer guide · {POLICIES.length} stores in {COUNTRIES.length} countries · policies checked {formatDate(LATEST)}
+            </span>
+          </p>
+          <Link to="/editorial-policy/" className="hidden font-semibold text-white underline-offset-2 hover:underline sm:inline">
+            How we verify policies
+          </Link>
+        </Container>
+      </div>
       <header className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur">
         <Container className="flex h-16 items-center gap-4">
           <Logo />
@@ -140,6 +162,7 @@ export default function Layout() {
       <main id="main" className="flex-1">
         <Outlet />
       </main>
+      <CountrySuggestion pathname={pathname} />
 
       <footer className="mt-20 border-t border-line bg-navy text-slate-300">
         <Container className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-5">

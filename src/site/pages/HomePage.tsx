@@ -125,6 +125,28 @@ export function Component() {
         </Container>
       </section>
 
+      {/* Trust band: real numbers from the data */}
+      <section aria-label="What we cover" className="border-b border-line bg-paper">
+        <Container className="grid grid-cols-2 gap-6 py-8 md:grid-cols-4">
+          {[
+            [POLICIES.length, "", "store policies, each read on the official site"],
+            [COUNTRIES.length, "", "countries, with the legal rights explained"],
+            [POLICIES.length + COUNTRIES.length, "", "official sources linked, never paraphrased blind"],
+            [BRANDS.length, "", "brands compared across borders"],
+          ].map(([n, suffix, label]) => (
+            <div key={String(label)} data-reveal>
+              <p className="font-serif text-4xl font-bold text-brand-700 sm:text-5xl">
+                <span data-count={n} data-suffix={suffix}>
+                  {n}
+                  {suffix}
+                </span>
+              </p>
+              <p className="mt-1 text-sm leading-snug text-ink-2">{label}</p>
+            </div>
+          ))}
+        </Container>
+      </section>
+
       <Container>
         <Section
           id="where"
@@ -157,6 +179,28 @@ export function Component() {
           <p className="mt-5">
             <Link to="/brands/" className="inline-block py-2 font-semibold text-brand-700 underline underline-offset-2">
               All {BRANDS.length} brands compared by country
+            </Link>
+          </p>
+        </Section>
+
+        <Section id="process" title="How every policy is checked" intro="The same four steps for every store, in every country. That is why each page shows a date and a source link.">
+          <ol className="relative grid gap-4 md:grid-cols-4" data-stagger>
+            {[
+              ["Find the official page", "We go to the retailer's own returns page or terms, never a forum, coupon site or old news story."],
+              ["Read it in full", "Windows, exceptions, fees, receipts and holiday rules, including the fine print in the local language."],
+              ["Write it plainly", "One clear answer first, then the exceptions and steps, with the store's own source linked."],
+              ["Date it and re-check", "Each page shows the day we checked. When a store changes its rules, the page and its date change too."],
+            ].map(([t, d], i) => (
+              <li key={t} className="rounded-2xl border border-line bg-card p-5">
+                <span className="font-mono text-xs font-bold tracking-widest text-brand-700">STEP {String(i + 1).padStart(2, "0")}</span>
+                <h3 className="mt-2 font-serif text-lg font-bold text-ink">{t}</h3>
+                <p className="mt-1 text-sm text-ink-2">{d}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="mt-4">
+            <Link to="/editorial-policy/" className="inline-block py-2 font-semibold text-brand-700 underline underline-offset-2">
+              Read our editorial policy
             </Link>
           </p>
         </Section>
