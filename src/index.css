@@ -139,6 +139,25 @@ h3 {
     transform: none;
   }
 }
+/* Window bars on brand pages grow from the left once (transform only) */
+.bar-grow {
+  transform-origin: left center;
+  animation: bar-grow 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+[dir="rtl"] .bar-grow {
+  transform-origin: right center;
+}
+@keyframes bar-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bar-grow {
+    animation: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

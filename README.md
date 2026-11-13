@@ -12,7 +12,13 @@ Independent guide — not affiliated with DSW Designer Shoe Warehouse or any ret
   own title, description, canonical URL, Open Graph image and JSON-LD.
 - **One source of truth:** `src/data/policies.ts` holds the verified policy for every store (window, receipt rules,
   fees, exceptions, steps, FAQs, holiday rules, official source link, date checked). Store pages, comparisons, category
-  tables, images and structured data are all generated from it. Research notes: `research/verified-2026-11.md`.
+  tables, images and structured data are all generated from it. Stores outside the original set live in
+  `src/data/world/*.ts` (Europe, Gulf, South Asia, Canada/Australia) and are merged into `POLICIES`.
+  Research notes: `research/verified-2026-11.md`.
+- **Countries and brands:** `src/data/countries.ts` defines the country pages (`/countries/:country/`: intro, legal
+  rights, official consumer-authority link, FAQs) and the multi-country brands (`/brands/:brand/`). A store joins a
+  country through its `country` field; a brand lists its store slugs. The visitor's last-viewed country is kept only in
+  their browser's localStorage.
 - **Guides:** Markdown files in `src/content/guides/*.md` (frontmatter + body; `## Frequently asked questions` with
   `### Question` headings becomes FAQ schema). Store facts in guides must match `policies.ts`.
 - **Images:** `npm run images` draws the timeline graphic for each store, guide covers and comparison cards

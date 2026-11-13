@@ -2,14 +2,17 @@ import { Link, useParams } from "react-router-dom";
 import { getPolicy, type VerifiedPolicy } from "../../data/policies";
 import Seo from "../Seo";
 import { breadcrumbSchema, faqSchema } from "../schema";
-import { Breadcrumbs, Container, FactTable, FaqList, PolicyImage, Section, StoreCard, Timeline, WindowBadge } from "../ui";
+import { Breadcrumbs, Container, CountryBadge, FactTable, FaqList, PolicyImage, Section, StoreCard, Timeline, WindowBadge, windowLabel } from "../ui";
 import DeadlineCalculator from "../DeadlineCalculator";
 import { categoryOf, formatDate, pairSlug, pairsFor, relatedStores, storeOg } from "../data";
 import { guidesForStore } from "../guides";
 import { AUTHORS, absoluteUrl, href } from "../config";
 import { NotFoundContent } from "./NotFoundPage";
+import { brandOfPolicy, brandStores, countryOfPolicy } from "../../data/countries";
 
 export function clamp(text: string, max = 155) {
+  // "&" is written as "&amp;" in the HTML, so each one costs 4 extra characters of the budget
+  max -= (text.slice(0, max).match(/&/g)?.length ?? 0) * 4;
   if (text.length <= max) return text;
   const cut = text.slice(0, max);
   return cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:.\s]+$/, "") + ".";
@@ -58,6 +61,9 @@ export function Component() {
   const related = relatedStores(p);
   const author = AUTHORS["ali-hamza"];
   const faqs = p.faqs;
+  const country = countryOfPolicy(p);
+  const brand = brandOfPolicy(p);
+  const siblings = brand ? brandStores(brand) : [];
 
   return (
     <article>
@@ -90,7 +96,14 @@ export function Component() {
           <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-center">
             <div>
               <p className="text-sm font-semibold uppercase tracking-wider text-brand-700">
-                {p.country} · {p.category}
+                {country ? (
+                  <Link to={href(`/countries/${country.slug}`)} className="underline-offset-2 hover:underline">
+                    {p.country}
+                  </Link>
+                ) : (
+                  p.country
+                )}{" "}
+                · {p.category}
               </p>
               <h1 className="mt-2 text-3xl font-bold text-ink sm:text-[2.6rem]">{p.name} return policy</h1>
               <div className="mt-5 flex items-center gap-4 rounded-2xl border border-brand-200 bg-brand-50 p-4">
@@ -119,6 +132,37 @@ export function Component() {
             </div>
             <PolicyImage p={p} eager />
           </div>
+          {brand && siblings.length > 1 && (
+            <nav aria-labelledby="brand-countries" className="mt-8 rounded-2xl border border-line bg-paper p-4">
+              <p id="brand-countries" className="text-sm font-bold text-ink">
+                {brand.name} in other countries{" "}
+                <Link to={href(`/brands/${brand.slug}`)} className="font-semibold text-brand-700 underline underline-offset-2">
+                  compare all {siblings.length}
+                </Link>
+              </p>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {siblings.map((s) => {
+                  const c = countryOfPolicy(s);
+                  const current = s.slug === p.slug;
+                  return (
+                    <li key={s.slug}>
+                      <Link
+                        to={href(`/stores/${s.slug}`)}
+                        aria-current={current ? "page" : undefined}
+                        className={`inline-flex min-h-[44px] items-center gap-2 rounded-full border py-1 pl-1.5 pr-4 text-sm font-semibold transition ${
+                          current ? "border-brand-600 bg-brand-700 text-white" : "border-line bg-card text-ink-2 hover:border-brand-500 hover:text-brand-700"
+                        }`}
+                      >
+                        {c && <CountryBadge code={c.code} colors={c.badge} size="sm" />}
+                        {c?.name ?? s.country}
+                        <span className={current ? "text-brand-100" : "text-ink-3"}>· {windowLabel(s).big}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+          )}
         </Container>
       </div>
 
@@ -238,6 +282,15 @@ export function Component() {
                     </li>
                   ))}
                 </ul>
+              </div>
+            )}
+            {country && (
+              <div className="rounded-2xl border border-line bg-card p-5">
+                <p className="text-xs font-bold uppercase tracking-wider text-ink-3">Shopping in {country.name}?</p>
+                <Link to={href(`/countries/${country.slug}`)} className="mt-3 flex items-center gap-3 font-semibold text-brand-700 hover:underline">
+                  <CountryBadge code={country.code} colors={country.badge} size="sm" />
+                  All {country.name} store policies & your legal rights
+                </Link>
               </div>
             )}
             {guides.length > 0 && (

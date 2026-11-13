@@ -5,16 +5,18 @@ import { useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { POLICIES } from "../data/policies";
 import { CATEGORIES } from "./data";
+import { COUNTRIES } from "../data/countries";
 import { SITE_NAME, href } from "./config";
 import { Container } from "./ui";
 
 const NAV = [
   { to: "/stores/", label: "Stores" },
+  { to: "/countries/", label: "Countries" },
+  { to: "/brands/", label: "Brands" },
   { to: "/compare/", label: "Compare" },
   { to: "/blog/", label: "Guides" },
-  { to: "/about/", label: "About" },
 ];
-const FOOTER_STORES = ["dsw", "walmart", "target", "amazon", "costco", "kohls", "nike", "sephora", "shein", "temu", "daraz", "best-buy"];
+const FOOTER_STORES = ["dsw", "walmart", "target", "amazon", "costco", "nike", "amazon-uk", "asos", "amazon-ae", "noon", "daraz", "flipkart"];
 
 function Logo() {
   return (
@@ -92,13 +94,13 @@ export default function Layout() {
       <header className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur">
         <Container className="flex h-16 items-center gap-4">
           <Logo />
-          <nav aria-label="Main" className="ml-4 hidden items-center gap-1 md:flex">
+          <nav aria-label="Main" className="ml-2 hidden items-center gap-0.5 md:flex lg:ml-4">
             {NAV.map((n) => (
               <NavLink
                 key={n.to}
                 to={n.to}
                 className={({ isActive }) =>
-                  `rounded-lg px-3 py-2 text-[15px] font-semibold transition ${isActive ? "bg-brand-50 text-brand-800" : "text-ink-2 hover:bg-soft hover:text-ink"}`
+                  `rounded-lg px-2.5 py-2 text-[15px] font-semibold transition lg:px-3 ${isActive ? "bg-brand-50 text-brand-800" : "text-ink-2 hover:bg-soft hover:text-ink"}`
                 }
               >
                 {n.label}
@@ -124,7 +126,7 @@ export default function Layout() {
             <Container className="space-y-3 py-4">
               <SearchBox />
               <nav aria-label="Mobile" className="grid grid-cols-2 gap-2">
-                {NAV.map((n) => (
+                {[...NAV, { to: "/about/", label: "About" }].map((n) => (
                   <Link key={n.to} to={n.to} className="rounded-xl border border-line bg-card px-4 py-3 font-semibold text-ink">
                     {n.label}
                   </Link>
@@ -140,7 +142,7 @@ export default function Layout() {
       </main>
 
       <footer className="mt-20 border-t border-line bg-navy text-slate-300">
-        <Container className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
+        <Container className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-5">
           <div>
             <p className="font-serif text-xl font-bold text-white">
               DSW<span className="text-brand-300">ReturnRefund</span>
@@ -169,6 +171,18 @@ export default function Layout() {
             </ul>
           </div>
           <div>
+            <h2 className="font-sans text-xs font-bold uppercase tracking-wider text-white">By country</h2>
+            <ul className="mt-3 space-y-1.5 text-sm">
+              {COUNTRIES.map((c) => (
+                <li key={c.slug}>
+                  <Link to={href(`/countries/${c.slug}`)} className="hover:text-white hover:underline">
+                    {c.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
             <h2 className="font-sans text-xs font-bold uppercase tracking-wider text-white">By category</h2>
             <ul className="mt-3 space-y-1.5 text-sm">
               {CATEGORIES.map((c) => (
@@ -185,6 +199,7 @@ export default function Layout() {
             <ul className="mt-3 space-y-1.5 text-sm">
               {[
                 ["/about/", "About us"],
+                ["/brands/", "Brands by country"],
                 ["/editorial-policy/", "How we check policies"],
                 ["/contact/", "Contact & corrections"],
                 ["/disclaimer/", "Disclaimer"],

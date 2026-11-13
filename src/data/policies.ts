@@ -27,7 +27,7 @@ export interface VerifiedPolicy {
   name: string;
   /** Market the rules apply to */
   country: string;
-  region: "us" | "ca" | "uk" | "au" | "me" | "south-asia" | "global";
+  region: "us" | "ca" | "uk" | "eu" | "au" | "me" | "south-asia" | "global";
   category: string;
   /** Short answer shown first, e.g. "60 days with a receipt" */
   headline: string;
@@ -49,9 +49,14 @@ export interface VerifiedPolicy {
   checked: string;
 }
 
+import { EUROPE_POLICIES } from "./world/europe";
+import { GULF_POLICIES } from "./world/gulf";
+import { SOUTH_ASIA_POLICIES } from "./world/south-asia";
+import { AMERICAS_OCEANIA_POLICIES } from "./world/americas-oceania";
+
 const CHECKED = "2026-11-13";
 
-export const POLICIES: VerifiedPolicy[] = [
+const BASE_POLICIES: VerifiedPolicy[] = [
   // ─── United States ──────────────────────────────────────────────────────────
   {
     slug: "dsw",
@@ -1790,6 +1795,14 @@ export const POLICIES: VerifiedPolicy[] = [
   },
 ];
 
+export const POLICIES: VerifiedPolicy[] = [
+  ...BASE_POLICIES,
+  ...EUROPE_POLICIES,
+  ...GULF_POLICIES,
+  ...SOUTH_ASIA_POLICIES,
+  ...AMERICAS_OCEANIA_POLICIES,
+];
+
 export const POLICY_BY_SLUG = new Map(POLICIES.map((p) => [p.slug, p]));
 export function getPolicy(slug: string | undefined) {
   return slug ? POLICY_BY_SLUG.get(slug) : undefined;
@@ -1797,10 +1810,11 @@ export function getPolicy(slug: string | undefined) {
 
 export const REGIONS: { id: VerifiedPolicy["region"]; name: string }[] = [
   { id: "us", name: "United States" },
-  { id: "global", name: "Online marketplaces" },
-  { id: "ca", name: "Canada" },
   { id: "uk", name: "United Kingdom" },
+  { id: "eu", name: "Europe" },
+  { id: "ca", name: "Canada" },
   { id: "au", name: "Australia" },
-  { id: "me", name: "Middle East" },
+  { id: "me", name: "Gulf (UAE & Saudi Arabia)" },
   { id: "south-asia", name: "Pakistan & India" },
+  { id: "global", name: "Online marketplaces" },
 ];

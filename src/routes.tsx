@@ -8,6 +8,7 @@ import Layout from "./site/Layout";
 import { POLICIES } from "./data/policies";
 import { CATEGORIES, COMPARE_PAIRS, pairSlug } from "./site/data";
 import { GUIDES } from "./site/guides";
+import { BRANDS, COUNTRIES } from "./data/countries";
 
 export const routes: RouteRecord[] = [
   {
@@ -26,6 +27,18 @@ export const routes: RouteRecord[] = [
         path: "stores/:slug",
         lazy: () => import("./site/pages/StorePage"),
         getStaticPaths: () => POLICIES.map((p) => `stores/${p.slug}`),
+      },
+      { path: "countries", lazy: () => import("./site/pages/CountriesPage") },
+      {
+        path: "countries/:country",
+        lazy: () => import("./site/pages/CountryPage"),
+        getStaticPaths: () => COUNTRIES.map((c) => `countries/${c.slug}`),
+      },
+      { path: "brands", lazy: () => import("./site/pages/BrandsPage") },
+      {
+        path: "brands/:brand",
+        lazy: () => import("./site/pages/BrandPage"),
+        getStaticPaths: () => BRANDS.map((b) => `brands/${b.slug}`),
       },
       { path: "compare", lazy: () => import("./site/pages/ComparePage") },
       {

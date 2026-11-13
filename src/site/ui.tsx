@@ -37,6 +37,7 @@ export function Breadcrumbs({ items }: { items: { name: string; path: string }[]
 
 /** The main number people look for: "60 days", "No set limit", "Varies". */
 export function windowLabel(p: VerifiedPolicy): { big: string; small: string } {
+  if (p.windowDays === null && p.headline.startsWith("No change-of-mind")) return { big: "No returns", small: "change of mind" };
   if (p.windowDays === null) return { big: p.slug === "costco" ? "No set limit" : "Varies", small: p.slug === "costco" ? "most items" : "see details" };
   return { big: `${p.windowDays} days`, small: "main window" };
 }
@@ -154,4 +155,18 @@ export function PolicyImage({ p, eager = false }: { p: VerifiedPolicy; eager?: b
 
 export function Pill({ children }: { children: ReactNode }) {
   return <span className="inline-flex items-center rounded-full border border-line bg-card px-3 py-1 text-sm font-medium text-ink-2">{children}</span>;
+}
+
+/** Two-letter country code chip (no flag emoji: they render inconsistently and aren't accessible). */
+export function CountryBadge({ code, colors, size = "md" }: { code: string; colors: [string, string]; size?: "sm" | "md" | "lg" }) {
+  const dims = size === "lg" ? "h-14 w-14 text-lg" : size === "sm" ? "h-7 w-7 text-[11px]" : "h-10 w-10 text-sm";
+  return (
+    <span
+      aria-hidden="true"
+      className={`inline-flex shrink-0 items-center justify-center rounded-xl font-sans font-extrabold tracking-wide ${dims}`}
+      style={{ backgroundColor: colors[0], color: colors[1] }}
+    >
+      {code}
+    </span>
+  );
 }

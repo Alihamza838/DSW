@@ -111,6 +111,19 @@ export const COMPARE_PAIRS: [string, string][] = [
   ["home-depot", "ikea"],
   ["temu", "aliexpress"],
   ["flipkart", "myntra"],
+  ["next", "marks-and-spencer"],
+  ["asos", "next"],
+  ["argos", "currys"],
+  ["amazon-uk", "argos"],
+  ["noon", "amazon-ae"],
+  ["namshi", "centrepoint"],
+  ["amazon-in", "flipkart"],
+  ["nykaa", "myntra"],
+  ["khaadi", "sapphire"],
+  ["sapphire", "gul-ahmed"],
+  ["kmart-au", "target-au"],
+  ["canadian-tire", "walmart-ca"],
+  ["zalando", "asos"],
 ];
 export const pairSlug = (a: string, b: string) => `${a}-vs-${b}`;
 export function parsePair(slug: string | undefined): [VerifiedPolicy, VerifiedPolicy] | undefined {
