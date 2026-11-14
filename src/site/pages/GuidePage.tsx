@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { ReadingProgress } from "../ScrollEffects";
+import TocNav from "../TocNav";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import type { ReactNode } from "react";
@@ -72,7 +73,7 @@ export function Component() {
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
-                  h2: ({ children }) => <h2 id={slugify(text(children))}>{children}</h2>,
+                  h2: ({ children }) => <h2 id={slugify(text(children))} data-reveal="left">{children}</h2>,
                   a: ({ href: h, children }) =>
                     h && h.startsWith("/") ? (
                       <Link to={href(h)}>{children}</Link>
@@ -94,18 +95,7 @@ export function Component() {
           </div>
           <aside className="mt-10 space-y-6 lg:sticky lg:top-24 lg:mt-0 lg:self-start" aria-label="Article navigation">
             {g.headings.length > 2 && (
-              <nav aria-label="On this page" className="rounded-2xl border border-line bg-card p-5">
-                <p className="text-xs font-bold uppercase tracking-wider text-ink-3">On this page</p>
-                <ol className="mt-3 space-y-2 text-sm">
-                  {g.headings.map((h) => (
-                    <li key={h.id}>
-                      <a href={`#${h.id}`} className="text-ink-2 hover:text-brand-700 hover:underline">
-                        {h.text}
-                      </a>
-                    </li>
-                  ))}
-                </ol>
-              </nav>
+              <TocNav items={g.headings} />
             )}
           </aside>
         </div>

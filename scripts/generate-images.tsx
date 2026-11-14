@@ -55,7 +55,7 @@ function storeHtml(p: VerifiedPolicy) {
       <b>${t.day === 0 ? "Day 0" : `Day ${t.day}`}</b><span>${esc(t.label)}</span></div></div>`;
   });
   const single = pts.length < 2;
-  const big = p.headline.startsWith("No change-of-mind") ? "No returns" : p.windowDays === null ? (p.slug === "costco" ? "No set limit" : "Varies") : `${p.windowDays} days`;
+  const big = p.headline.startsWith("No change-of-mind") ? "No returns" : p.windowDays === null ? (p.slug === "costco" || /no set|any time|no fixed/i.test(p.headline) ? "No set limit" : "Varies") : `${p.windowDays} days`;
   return `<!doctype html><html><head><meta charset="utf-8"><style>${BASE_CSS}
 .k{position:absolute;left:64px;top:52px;font-size:22px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0f766e}
 h1{position:absolute;left:64px;top:92px;font-size:62px;font-weight:700;letter-spacing:-.01em}
@@ -108,7 +108,7 @@ ${brand}</body></html>`;
 
 function compareHtml(a: VerifiedPolicy, b: VerifiedPolicy) {
   const box = (p: VerifiedPolicy) => {
-    const big = p.headline.startsWith("No change-of-mind") ? "No returns" : p.windowDays === null ? (p.slug === "costco" ? "No limit" : "Varies") : `${p.windowDays} days`;
+    const big = p.headline.startsWith("No change-of-mind") ? "No returns" : p.windowDays === null ? (p.slug === "costco" || /no set|any time|no fixed/i.test(p.headline) ? "No limit" : "Varies") : `${p.windowDays} days`;
     return `<div class="b"><p class="serif n">${esc(p.name)}</p><p class="serif d">${esc(big)}</p><p class="h">${esc(p.headline)}</p></div>`;
   };
   return `<!doctype html><html><head><meta charset="utf-8"><style>${BASE_CSS}

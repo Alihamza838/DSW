@@ -3,7 +3,9 @@ import { getPolicy, type VerifiedPolicy } from "../../data/policies";
 import Seo from "../Seo";
 import { breadcrumbSchema, faqSchema } from "../schema";
 import { Breadcrumbs, Container, CountryBadge, FactTable, FaqList, PolicyImage, Section, StoreCard, Timeline, WindowBadge, windowLabel } from "../ui";
-import DeadlineCalculator from "../DeadlineCalculator";
+import ReturnChecker from "../ReturnChecker";
+import TocNav from "../TocNav";
+import { useEffect } from "react";
 import PolicyActions from "../PolicyActions";
 import { ReadingProgress } from "../ScrollEffects";
 import { categoryOf, formatDate, pairSlug, pairsFor, relatedStores, storeOg } from "../data";
@@ -51,9 +53,23 @@ function hostOf(url: string) {
   }
 }
 
+function useRememberStore(slug: string | undefined) {
+  useEffect(() => {
+    if (!slug) return;
+    try {
+      const key = "dswrr-recent";
+      const list = JSON.parse(window.localStorage.getItem(key) ?? "[]") as string[];
+      window.localStorage.setItem(key, JSON.stringify([slug, ...list.filter((s) => s !== slug)].slice(0, 8)));
+    } catch {
+      /* storage blocked */
+    }
+  }, [slug]);
+}
+
 export function Component() {
   const { slug } = useParams<{ slug: string }>();
   const p = getPolicy(slug);
+  useRememberStore(p?.slug);
   if (!p) return <NotFoundContent />;
 
   const path = `/stores/${p.slug}`;
@@ -72,9 +88,18 @@ export function Component() {
   const country = countryOfPolicy(p);
   const brand = brandOfPolicy(p);
   const siblings = brand ? brandStores(brand) : [];
+  const w = windowLabel(p);
+  const toc = [
+    { id: "check", text: "Can I still return it?" },
+    { id: "key-facts", text: "At a glance" },
+    ...(p.timeline.length > 1 ? [{ id: "timeline", text: "Timeline" }] : []),
+    { id: "exceptions", text: "Exceptions" },
+    { id: "how-to-return", text: "How to return" },
+    { id: "faq", text: "Questions" },
+  ];
 
   return (
-    <article>
+    <article className="pb-20 lg:pb-0">
       <ReadingProgress />
       <Seo
         title={storeTitle(p)}
@@ -191,16 +216,17 @@ export function Component() {
               </aside>
             )}
 
+            <Section id="check" title="Can I still return it?" intro={`Four quick taps: see your exact ${p.name} deadline and only the rules that apply to your item.`}>
+              <ReturnChecker p={p} />
+            </Section>
+
             <Section id="key-facts" title={`${p.name} return policy at a glance`}>
               <FactTable facts={p.facts} />
             </Section>
 
             {p.timeline.length > 1 && (
-              <Section id="timeline" title="Your return timeline" intro="Each date counts from the day the window starts (purchase or delivery, see above).">
+              <Section id="timeline" title={`${p.name} return timeline`} intro="Each date counts from the day the window starts (purchase or delivery, see above).">
                 <Timeline points={p.timeline} />
-                <div className="mt-6">
-                  <DeadlineCalculator p={p} />
-                </div>
               </Section>
             )}
 
@@ -267,24 +293,9 @@ export function Component() {
           </div>
 
           <aside className="mt-12 space-y-6 lg:sticky lg:top-24 lg:self-start" aria-label="More">
-            <nav aria-label="On this page" className="hidden rounded-2xl border border-line bg-card p-5 lg:block">
-              <p className="text-xs font-bold uppercase tracking-wider text-ink-3">On this page</p>
-              <ul className="mt-3 space-y-2 text-sm">
-                {[
-                  ["key-facts", "At a glance"],
-                  ...(p.timeline.length > 1 ? [["timeline", "Timeline & deadline calculator"]] : []),
-                  ["exceptions", "Exceptions"],
-                  ["how-to-return", "How to return"],
-                  ["faq", "Questions"],
-                ].map(([id, label]) => (
-                  <li key={id}>
-                    <a href={`#${id}`} className="text-ink-2 hover:text-brand-700 hover:underline">
-                      {label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+            <div className="hidden lg:block">
+              <TocNav items={toc} />
+            </div>
             {pairs.length > 0 && (
               <div className="rounded-2xl border border-line bg-card p-5">
                 <p className="text-xs font-bold uppercase tracking-wider text-ink-3">Compare {p.name}</p>
@@ -335,6 +346,22 @@ export function Component() {
           </Section>
         )}
       </Container>
+
+      {/* Mobile action bar: the number and the two things people do next */}
+      <div className="no-print fixed inset-x-0 bottom-0 z-30 border-t border-line bg-white/95 px-4 py-2.5 backdrop-blur lg:hidden" style={{ paddingBottom: "max(0.625rem, env(safe-area-inset-bottom))" }}>
+        <div className="mx-auto flex max-w-xl items-center gap-3">
+          <span className="flex min-w-0 flex-col leading-tight">
+            <span className="font-serif text-xl font-bold text-brand-700">{w.big}</span>
+            <span className="max-w-[8rem] truncate text-[11px] text-ink-3">{p.name}</span>
+          </span>
+          <a href="#check" className="ml-auto inline-flex min-h-[44px] items-center rounded-xl bg-brand-700 px-4 text-sm font-bold text-white">
+            Check my item
+          </a>
+          <a href={p.source} target="_blank" rel="noopener nofollow" className="inline-flex min-h-[44px] items-center rounded-xl border border-line px-4 text-sm font-bold text-ink">
+            Official ↗
+          </a>
+        </div>
+      </div>
     </article>
   );
 }

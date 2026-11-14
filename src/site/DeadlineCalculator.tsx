@@ -13,7 +13,7 @@ import type { VerifiedPolicy } from "../data/policies";
 const DAY = 86400000;
 const iso = (d: Date) => d.toISOString().slice(0, 10);
 
-function visitorLocale() {
+export function visitorLocale() {
   try {
     return navigator.language || "en-US";
   } catch {
@@ -21,7 +21,7 @@ function visitorLocale() {
   }
 }
 
-function icsFor(p: VerifiedPolicy, label: string, end: Date) {
+export function icsFor(p: VerifiedPolicy, label: string, end: Date) {
   const ymd = (d: Date) => iso(d).replace(/-/g, "");
   const next = new Date(end.getTime() + DAY);
   const remind = new Date(end.getTime() - 3 * DAY);

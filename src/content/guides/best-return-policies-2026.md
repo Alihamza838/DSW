@@ -3,10 +3,10 @@ title: Best Return Policies of 2026: Stores Ranked by Window
 slug: best-return-policies-2026
 description: The most generous store return policies in 2026, ranked by how many days you get, from Costco and IKEA to the 14-day electronics stores, with each rule checked.
 date: 2026-01-10
-updated: 2026-11-13
+updated: 2026-11-14
 author: malik-umar
 category: Comparison
-stores: costco, ikea, home-depot, target, walmart, kohls, nike, dsw, best-buy, apple
+stores: costco, patagonia, sams-club, chewy, ll-bean, rei, ikea, home-depot, target, walmart, kohls, nike, dsw, best-buy, apple
 ---
 
 A good return policy is worth real money: it decides whether a wrong size or a disappointing gadget is a quick errand or a loss. We ranked the stores we cover by the length of their main return window, using only rules confirmed on each store's own website (checked November 13, 2026).
@@ -18,6 +18,11 @@ Length isn't everything, so after the ranking we look at the details that make a
 | Store | Main window | The catch |
 |---|---|---|
 | [Costco](/stores/costco) | No fixed limit for most items | Electronics and major appliances: 90 days |
+| [Patagonia](/stores/patagonia) | No set time limit | Fit or colour returns should be prompt, with tags |
+| [Sam's Club](/stores/sams-club) | Most items any time | Active members only; electronics 90 days, phones 14 |
+| [Chewy](/stores/chewy) | 365 days | Unused, unexpired products |
+| [L.L.Bean](/stores/ll-bean) | 1 year | Proof of purchase; after a year only defects |
+| [REI](/stores/rei) | 1 year for co-op members | Non-members get 90 days |
 | [IKEA US](/stores/ikea) | 365 days unopened, 180 opened | Plants, cut fabric, custom countertops and as-is items excluded |
 | [Home Depot](/stores/home-depot) | 90 days (365 with a Home Depot card) | Cut flowers not returnable |
 | [Target](/stores/target) | 90 days; Target Owned Brands 1 year | Electronics and entertainment 30 days |
@@ -35,7 +40,13 @@ Length isn't everything, so after the ranking we look at the details that make a
 
 [Costco](/stores/costco) stands out because its satisfaction guarantee has no fixed deadline for most products. The exception list is specific: televisions, projectors, major appliances, computers, tablets, smart wearables, cameras, drones, camcorders, MP3 players and cell phones must come back within 90 days. A handful of items can't be refunded at all, such as gift cards, tickets and custom-made products. Costco will even refund the membership fee at any time.
 
-## A year or more: IKEA, Home Depot and Target's own brands
+## No time limit: Patagonia and Sam's Club
+
+[Patagonia](/stores/patagonia) accepts returns of anything it sold, even used and sale items, with no set time limit; fit and colour returns should be made promptly with tags, and older items are reviewed under its Ironclad Guarantee. [Sam's Club](/stores/sams-club) lets active members return most items at any time, with 90 days for electronics and 14 for phones.
+
+## A year or more: Chewy, L.L.Bean, REI, IKEA, Home Depot and Target's own brands
+
+[Chewy](/stores/chewy) gives 365 days and pays for return shipping. [L.L.Bean](/stores/ll-bean) gives a year with proof of purchase, and [REI](/stores/rei) gives co-op members a year (non-members 90 days).
 
 [IKEA US](/stores/ikea) gives a full year for new, unopened products and 180 days for opened or assembled ones, which helps with furniture you only discover is wrong once it's built. Mattresses are handled differently: one exchange within 90 days.
 
@@ -69,7 +80,7 @@ The shortest windows belong to electronics stores. [Best Buy](/stores/best-buy) 
 
 ### Which store has the best return policy in 2026?
 
-Of the stores we cover, Costco is the most generous, with no fixed window for most items. IKEA US (365 days for unopened products) and Home Depot with a Home Depot card (365 days) follow.
+Costco, Patagonia and Sam's Club (for members) have no fixed window on most items. Chewy, L.L.Bean, IKEA US (unopened) and REI for co-op members give a full year.
 
 ### Which stores give 90 days to return?
 

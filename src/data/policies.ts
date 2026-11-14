@@ -54,6 +54,7 @@ import { GULF_POLICIES } from "./world/gulf";
 import { SOUTH_ASIA_POLICIES } from "./world/south-asia";
 import { AMERICAS_OCEANIA_POLICIES } from "./world/americas-oceania";
 import { MORE_POLICIES } from "./world/more";
+import { POPULAR_POLICIES } from "./world/popular";
 
 const CHECKED = "2026-11-13";
 
@@ -1803,6 +1804,7 @@ export const POLICIES: VerifiedPolicy[] = [
   ...SOUTH_ASIA_POLICIES,
   ...AMERICAS_OCEANIA_POLICIES,
   ...MORE_POLICIES,
+  ...POPULAR_POLICIES,
 ];
 
 export const POLICY_BY_SLUG = new Map(POLICIES.map((p) => [p.slug, p]));
