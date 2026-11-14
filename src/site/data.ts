@@ -131,6 +131,14 @@ export const COMPARE_PAIRS: [string, string][] = [
   ["otto", "zalando"],
   ["extra", "jarir"],
   ["limelight", "khaadi"],
+  ["zappos", "dsw"],
+  ["zappos", "nike"],
+  ["rei", "patagonia"],
+  ["costco", "sams-club"],
+  ["uniqlo", "zara"],
+  ["samsung", "apple"],
+  ["dicks", "foot-locker"],
+  ["chewy", "amazon"],
 ];
 export const pairSlug = (a: string, b: string) => `${a}-vs-${b}`;
 export function parsePair(slug: string | undefined): [VerifiedPolicy, VerifiedPolicy] | undefined {

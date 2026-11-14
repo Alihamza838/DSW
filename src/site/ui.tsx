@@ -35,10 +35,13 @@ export function Breadcrumbs({ items }: { items: { name: string; path: string }[]
   );
 }
 
+/** Stores whose main rule has no fixed deadline (Costco, Patagonia, Sam's Club) */
+export const noLimit = (p: VerifiedPolicy) => p.windowDays === null && (p.slug === "costco" || /no set|any time|no fixed/i.test(p.headline));
+
 /** The main number people look for: "60 days", "No set limit", "Varies". */
 export function windowLabel(p: VerifiedPolicy): { big: string; small: string } {
   if (p.windowDays === null && p.headline.startsWith("No change-of-mind")) return { big: "No returns", small: "change of mind" };
-  if (p.windowDays === null) return { big: p.slug === "costco" ? "No set limit" : "Varies", small: p.slug === "costco" ? "most items" : "see details" };
+  if (p.windowDays === null) return noLimit(p) ? { big: "No set limit", small: "most items" } : { big: "Varies", small: "see details" };
   return { big: `${p.windowDays} days`, small: "main window" };
 }
 

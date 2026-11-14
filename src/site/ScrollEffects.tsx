@@ -39,6 +39,7 @@ function countUp(el: HTMLElement) {
 
 export function ScrollEffects() {
   const { pathname } = useLocation();
+  useParallax();
   // Before the new route paints, switch hiding off until its elements have been checked
   useLayoutEffect(() => {
     document.documentElement.classList.remove("fx-ready");
@@ -79,6 +80,30 @@ export function ScrollEffects() {
     };
   }, [pathname]);
   return null;
+}
+
+/** Gentle parallax for decorative shapes: [data-parallax="0.15"] moves at 15% of the scroll speed */
+export function useParallax() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    if (reducedMotion()) return;
+    const els = [...document.querySelectorAll<HTMLElement>("[data-parallax]")];
+    if (!els.length) return;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const y = window.scrollY;
+      for (const el of els) el.style.transform = `translate3d(0, ${(y * Number(el.dataset.parallax || 0.1)).toFixed(1)}px, 0)`;
+    };
+    const on = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    window.addEventListener("scroll", on, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", on);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, [pathname]);
 }
 
 export function ReadingProgress() {

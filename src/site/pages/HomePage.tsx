@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Seo from "../Seo";
 import { faqSchema, organizationSchema, websiteSchema } from "../schema";
 import { Container, CountryBadge, FaqList, Section, StoreCard, windowLabel } from "../ui";
-import { POLICIES, getPolicy } from "../../data/policies";
+import { POLICIES, getPolicy, type VerifiedPolicy } from "../../data/policies";
 import { CATEGORIES, COMPARE_PAIRS, formatDate, pairSlug, storesInCategory } from "../data";
 import { GUIDES } from "../guides";
 import { href } from "../config";
@@ -11,7 +11,7 @@ import CountryPicker from "../CountryPicker";
 import { BRANDS, COUNTRIES, brandStores, countryOfPolicy } from "../../data/countries";
 
 const POPULAR = ["dsw", "walmart", "target", "amazon", "costco", "kohls", "nike", "sephora", "best-buy", "shein", "temu", "daraz"];
-const QUICK = ["dsw", "walmart", "amazon", "amazon-uk", "ikea-uk", "noon", "daraz", "flipkart"];
+const QUICK = ["dsw", "zappos", "walmart", "amazon", "amazon-uk", "ikea-uk", "noon", "daraz"];
 
 const HOME_FAQS = [
   {
@@ -36,6 +36,38 @@ const HOME_FAQS = [
   },
 ];
 
+/** Stores this visitor opened before (kept only in their browser) */
+function RecentStores() {
+  const [list, setList] = useState<string[]>([]);
+  useEffect(() => {
+    try {
+      setList((JSON.parse(window.localStorage.getItem("dswrr-recent") ?? "[]") as string[]).filter((s) => getPolicy(s)).slice(0, 6));
+    } catch {
+      setList([]);
+    }
+  }, []);
+  if (!list.length) return null;
+  return (
+    <section aria-labelledby="recent" className="mt-10 rounded-2xl border border-line bg-card p-5">
+      <h2 id="recent" className="font-sans text-xs font-bold uppercase tracking-wider text-brand-700">
+        Pick up where you left off
+      </h2>
+      <ul className="mt-3 flex flex-wrap gap-2">
+        {list.map((s) => {
+          const p = getPolicy(s)!;
+          return (
+            <li key={s}>
+              <Link to={href(`/stores/${s}`)} className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-line bg-paper px-4 text-sm font-semibold text-ink-2 hover:border-brand-500 hover:text-brand-700">
+                {p.name} <span className="text-brand-700">{windowLabel(p).big}</span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  );
+}
+
 export function Component() {
   const navigate = useNavigate();
   const [q, setQ] = useState("");
@@ -53,27 +85,32 @@ export function Component() {
         jsonLd={[organizationSchema(), websiteSchema(), faqSchema(HOME_FAQS)]}
       />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-line bg-card">
-        <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-brand-100 opacity-60 blur-3xl" />
-        <Container className="relative grid gap-10 py-12 sm:py-16 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-center">
+      {/* Hero: premium dark band with live policy cards from the verified data */}
+      <section className="hero-mesh relative overflow-hidden text-white">
+        <div aria-hidden="true" data-parallax="0.2" className="pointer-events-none absolute -right-32 -top-32 h-[460px] w-[460px] rounded-full bg-brand-400/30 blur-3xl" />
+        <div aria-hidden="true" data-parallax="-0.1" className="pointer-events-none absolute -bottom-40 -left-24 h-96 w-96 rounded-full bg-emerald-300/20 blur-3xl" />
+        <div aria-hidden="true" className="hero-grid pointer-events-none absolute inset-0" />
+        <Container className="relative grid gap-12 py-14 sm:py-20 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center">
           <div>
-            <p className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-800">
-              <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden="true" />
-              {POLICIES.length} stores · {COUNTRIES.length} countries · last checked {formatDate(latestChecked)}
+            <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-sm font-semibold text-brand-100 backdrop-blur">
+              <span className="relative flex h-2 w-2" aria-hidden="true">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-300 opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-300" />
+              </span>
+              {POLICIES.length} stores · {COUNTRIES.length} countries · checked {formatDate(latestChecked)}
             </p>
-            <h1 className="mt-5 text-4xl font-bold leading-[1.1] text-ink sm:text-5xl">
-              Store return policies, <span className="text-brand-700">checked and explained simply</span>
+            <h1 className="mt-6 text-4xl font-bold leading-[1.08] text-white sm:text-[3.4rem]">
+              Every store's return policy, <span className="text-gradient">checked and made simple.</span>
             </h1>
-            <p className="mt-5 max-w-xl text-lg text-ink-2">
-              How many days you have, whether you need the receipt, and what it costs, for DSW and {POLICIES.length - 1} other stores in the US, UK, Europe, the Gulf,
-              India, Pakistan and beyond. Every page is checked against the store's own website and shows the date.
+            <p className="mt-5 max-w-xl text-lg text-slate-200">
+              How many days you have, what to bring and when your money comes back, for DSW and {POLICIES.length - 1} other stores across the US, UK, Europe, the Gulf,
+              India and Pakistan. Read on each store's own website, dated, in plain words.
             </p>
             <form
               role="search"
               action="/stores/"
               method="get"
-              className="mt-7 flex max-w-xl gap-2"
+              className="mt-8 flex max-w-xl gap-2 rounded-2xl border border-white/15 bg-white/10 p-2 shadow-2xl shadow-black/20 backdrop-blur-md"
               onSubmit={(e) => {
                 e.preventDefault();
                 navigate(q.trim() ? `/stores/?q=${encodeURIComponent(q.trim())}` : "/stores/");
@@ -85,20 +122,20 @@ export function Component() {
                   name="q"
                   value={q}
                   onChange={(e) => setQ(e.target.value)}
-                  placeholder="Which store? e.g. DSW, Walmart, SHEIN"
-                  className="h-14 w-full rounded-2xl border border-line bg-paper px-5 text-lg text-ink placeholder:text-ink-3 focus:border-brand-500 focus:outline-none"
+                  placeholder="Which store? e.g. DSW, Zappos, IKEA"
+                  className="h-14 w-full rounded-xl bg-white px-5 text-lg text-ink placeholder:text-ink-3 focus:outline-none focus:ring-4 focus:ring-brand-300/60"
                 />
               </label>
-              <button type="submit" className="h-14 rounded-2xl bg-brand-700 px-6 text-lg font-semibold text-white hover:bg-brand-800">
+              <button type="submit" className="h-14 rounded-xl bg-brand-400 px-6 text-lg font-bold text-ink transition hover:bg-brand-300">
                 Search
               </button>
             </form>
-            <ul className="mt-4 flex flex-wrap gap-2" aria-label="Popular stores">
+            <ul className="mt-5 flex flex-wrap gap-2" aria-label="Popular stores">
               {QUICK.map((s) => {
                 const p = getPolicy(s)!;
                 return (
                   <li key={s}>
-                    <Link to={href(`/stores/${s}`)} className="inline-flex min-h-[40px] items-center rounded-full border border-line bg-card px-4 text-sm font-semibold text-ink-2 hover:border-brand-500 hover:text-brand-700">
+                    <Link to={href(`/stores/${s}`)} className="inline-flex min-h-[40px] items-center rounded-full border border-white/15 bg-white/5 px-4 text-sm font-semibold text-white transition hover:bg-white/15">
                       {p.name}
                     </Link>
                   </li>
@@ -107,21 +144,28 @@ export function Component() {
             </ul>
           </div>
 
-          {/* A real example card, from the verified data */}
-          <Link to={href("/stores/dsw")} className="group block rotate-1 rounded-3xl border border-line bg-paper p-6 shadow-xl shadow-brand-900/10 transition hover:rotate-0">
-            <p className="text-xs font-bold uppercase tracking-wider text-ink-3">Example · DSW</p>
-            <p className="mt-3 font-serif text-5xl font-bold text-brand-700">{dsw.windowDays} days</p>
-            <p className="mt-1 font-semibold text-ink">{dsw.headline}</p>
-            <dl className="mt-5 space-y-2 border-t border-dashed border-line pt-4 text-sm">
-              {dsw.facts.slice(1, 5).map((f) => (
-                <div key={f.label} className="flex justify-between gap-4">
-                  <dt className="text-ink-3">{f.label}</dt>
-                  <dd className="text-right font-medium text-ink">{f.value}</dd>
-                </div>
-              ))}
-            </dl>
-            <p className="mt-5 text-sm font-semibold text-brand-700 group-hover:underline">Read the full DSW return policy →</p>
-          </Link>
+          {/* Floating cards: real numbers from three stores */}
+          <div className="relative mx-auto h-[440px] w-full max-w-sm" aria-label="Examples from the verified data">
+            {[
+              [dsw, "left-0 top-0 rotate-[-4deg] float-a z-10"],
+              [getPolicy("zappos")!, "right-0 top-[150px] rotate-[4deg] float-b z-20"],
+              [getPolicy("costco")!, "left-4 top-[300px] rotate-[-2deg] float-c z-30"],
+            ].map(([p, cls]) => {
+              const pol = p as VerifiedPolicy;
+              const wl = windowLabel(pol);
+              return (
+                <Link
+                  key={pol.slug}
+                  to={href(`/stores/${pol.slug}`)}
+                  className={`absolute w-64 rounded-3xl border border-white/20 bg-white/95 p-5 text-ink shadow-2xl shadow-black/30 transition hover:rotate-0 ${cls as string}`}
+                >
+                  <span className="text-xs font-bold uppercase tracking-wider text-ink-3">{pol.name}</span>
+                  <span className="mt-1 block font-serif text-4xl font-bold text-brand-700">{wl.big}</span>
+                  <span className="mt-1 block text-sm leading-snug text-ink-2">{pol.headline}</span>
+                </Link>
+              );
+            })}
+          </div>
         </Container>
       </section>
 
@@ -148,6 +192,7 @@ export function Component() {
       </section>
 
       <Container>
+        <RecentStores />
         <Section
           id="where"
           title="Where do you shop?"
